@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
@@ -14,32 +13,36 @@ import ReviewsPage from './components/ReviewsPage';
 
 function App() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [theme, setTheme] = useState('dark'); // Смена темы
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+    };
+
     return (
         <Router>
-            <div className="App">
+            <div className={`App ${theme === 'light' ? 'light-theme' : ''}`}>
                 <header className="App-header">
-                    <div className="container">
-                        <Link to="/" className="header-title">QA Helper Platform</Link> {/* Заголовок теперь кликабельный */}
-
-                        <div className="nav-bar">
-                            <input
-                                type="search"
-                                placeholder="Поиск..."
-                                className="search-bar"
-                                value={searchQuery}
-                                onChange={handleSearchChange}
-                            />
-                            <nav>
-                                <Link to="/login" className="auth-button">Вход</Link>
-                            </nav>
-                        </div>
+                    <Link to="/" className="header-title">QA Helper Platform</Link> {/* Заголовок теперь кликабельный */}
+                    <div className="nav-bar">
+                        <input
+                            type="search"
+                            placeholder="Поиск..."
+                            className="search-bar"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
+                        <nav>
+                            <Link to="/login" className="auth-button">Вход</Link>
+                        </nav>
                     </div>
                 </header>
+
+                <button onClick={toggleTheme} className="auth-button">Переключить тему</button>
 
                 <Routes>
                     <Route path="/" element={<HomePage />} />
