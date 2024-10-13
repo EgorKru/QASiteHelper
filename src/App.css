@@ -1,17 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Подключаем пиксельный шрифт */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 /* Основные стили */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   color: #ffffff;
-  background-color: #000000; /* Чёрный фон для пиксельного эффекта */
-  background-image:
-          linear-gradient(#1a1a1a 1px, transparent 1px),
-          linear-gradient(90deg, #1a1a1a 1px, transparent 1px); /* Пиксельная сетка */
-  background-size: 10px 10px; /* Размер клеток сетки */
+  background-color: #000000; /* Чёрный фон */
   overflow: hidden; /* Отключаем скроллинг для фона */
   position: relative;
+}
+
+/* Эффект бегущего текста */
+@keyframes moveText {
+  0% {
+    transform: translateY(100%); /* Начальная позиция за нижней границей */
+  }
+  100% {
+    transform: translateY(-100%); /* Конечная позиция за верхней границей */
+  }
+}
+
+.running-code {
+  position: absolute;
+  white-space: nowrap; /* Запрет переноса строк */
+  font-family: 'Courier New', monospace;
+  font-size: 24px;
+  color: #39ff14; /* Цвет текста */
+  opacity: 0.8; /* Прозрачность */
+  animation: moveText 10s linear infinite; /* Анимация */
+}
+
+/* Размещение нескольких строк кода */
+.code-line {
+  position: absolute;
+  width: 100%;
+  opacity: 0.7;
+}
+
+.line1 {
+  top: 10%; /* Расположение первой линии */
+  animation-delay: 0s; /* Без задержки */
+}
+
+.line2 {
+  top: 30%; /* Расположение второй линии */
+  animation-delay: 2s; /* Задержка на 2 секунды */
+}
+
+.line3 {
+  top: 50%; /* Расположение третьей линии */
+  animation-delay: 4s; /* Задержка на 4 секунды */
+}
+
+.line4 {
+  top: 70%; /* Расположение четвёртой линии */
+  animation-delay: 6s; /* Задержка на 6 секунд */
+}
+
+.line5 {
+  top: 90%; /* Расположение пятой линии */
+  animation-delay: 8s; /* Задержка на 8 секунд */
 }
 
 /* Анимация неонового заголовка */
@@ -116,27 +164,37 @@ body {
 
 .auth-button:hover {
   background-color: #2ecc71;
+  color: #ffffff;
 }
 
-/* Ссылки в навигации */
-nav a {
-  font-family: 'Press Start 2P', cursive;
-  background-color: #39ff14;
-  padding: 8px;
-  color: #000;
-  text-decoration: none;
-  border: 2px solid #000;
-  font-size: 12px;
-  transition: background-color 0.3s ease;
-  border-radius: 0;
-  animation: pixelReveal 1s ease-in-out 2s forwards;
+/* Светлая тема */
+.light-theme {
+  background-color: #ffffff; /* Светлый фон */
+  color: #000000; /* Тёмный текст */
 }
 
-nav a:hover {
+.light-theme .App-header {
+  background-color: #f8f8f8; /* Светлый фон шапки */
+  box-shadow: inset 0 0 0 4px #2ecc71;
+  border-bottom: 4px solid #2ecc71;
+}
+
+.light-theme .header-title {
+  color: #2ecc71;
+  text-shadow: none; /* Убираем тень */
+}
+
+.light-theme .auth-button {
   background-color: #2ecc71;
+  color: #ffffff;
+  border: 2px solid #000;
 }
 
-/* Эффект интерактивного фона (мини-игра) */
+.light-theme .auth-button:hover {
+  background-color: #27ae60;
+}
+
+/* Фоновое изображение с пиксельной темой */
 body::before {
   content: '';
   position: absolute;
@@ -144,13 +202,13 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://example.com/pixel-background.png') repeat;
-  opacity: 0.1;
-  z-index: -1;
+  background: url('https://your-image-url.com/pixel-background.png') repeat; /* Замените на свое изображение */
+  opacity: 0.1; /* Прозрачность изображения */
+  z-index: -1; /* Помещаем фон за остальными элементами */
 }
 
 body:hover::before {
-  animation: pixelBackgroundMove 10s infinite linear;
+  animation: pixelBackgroundMove 30s infinite linear; /* Анимация движения фона */
 }
 
 @keyframes pixelBackgroundMove {
@@ -160,48 +218,4 @@ body:hover::before {
   to {
     background-position: 100% 100%;
   }
-}
-
-/* Светлая тема (переключение темы) */
-.light-theme {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.light-theme .App-header {
-  background-color: #ddd;
-  border-bottom-color: #ccc;
-}
-
-.light-theme .header-title {
-  color: #333;
-  text-shadow: none;
-}
-
-.light-theme .search-bar,
-.light-theme .auth-button,
-.light-theme nav a {
-  background-color: #fff;
-  color: #333;
-  border-color: #ddd;
-}
-
-.light-theme .auth-button:hover,
-.light-theme nav a:hover {
-  background-color: #ccc;
-}
-
-/* Панель достижений (геймификация) */
-.achievements {
-  display: flex;
-  gap: 10px;
-  animation: pixelReveal 1.5s ease-in-out 2.5s forwards;
-}
-
-.achievement-icon {
-  width: 40px;
-  height: 40px;
-  background-color: #39ff14;
-  border: 2px solid #000;
-  display: inline-block;
 }

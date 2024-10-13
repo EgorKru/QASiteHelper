@@ -27,7 +27,7 @@ function App() {
         <Router>
             <div className={`App ${theme === 'light' ? 'light-theme' : ''}`}>
                 <header className="App-header">
-                    <Link to="/" className="header-title">QA Helper Platform</Link> {/* Заголовок теперь кликабельный */}
+                    <Link to="/" className="header-title">QA Helper Platform</Link>
                     <div className="nav-bar">
                         <input
                             type="search"
@@ -43,6 +43,11 @@ function App() {
                 </header>
 
                 <button onClick={toggleTheme} className="auth-button">Переключить тему</button>
+
+                {/* Убрано всё, что находилось в .running-code */}
+                <div className="running-code">
+                    {/* Код удалён */}
+                </div>
 
                 <Routes>
                     <Route path="/" element={<HomePage />} />
