@@ -61,7 +61,7 @@ const HomePage = () => {
             link: '/reviews',
         },
         {
-            id: 'about',
+            id: 'aboutp',
             title: 'О проекте',
             description: 'Краткая информация о целях сайта',
             icon: 'fas fa-info-circle',
