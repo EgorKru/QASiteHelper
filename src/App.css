@@ -4,87 +4,151 @@ body {
   font-family: 'Arial', sans-serif;
   color: #ffffff;
   background-color: #121212; /* Темный фон */
-  background-image: url('C:/Users/Егор/Documents/projects/qa-education/src/images/markus-spiske-GXBF7vaC6L8-unsplash.jpg'); /* Картинка фона главного */
-  background-size: cover; /*TODO тут поиграть с заполнением фона */
+  background-image: url('/src/images/markus-spiske-GXBF7vaC6L8-unsplash.jpg'); /* Картинка фона главного */
+  background-size: cover; /* Заполнение фона */
   background-position: center;
 }
 
-      /* Шапка */
+/* Шапка */
 .App-header {
   background-color: rgba(30, 30, 30, 0.8); /* Полупрозрачный фон */
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  padding: 5px; /* Отступы */
+  text-align: center; /* Центрирование текста */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Тень */
+}
+
+/* Заголовок */
+.header-title {
+  font-size: 48px; /* Размер текста */
+  font-weight: bolder; /* Увеличенная жирность текста */
+  text-transform: uppercase; /* Заглавные буквы */
+  color: #39ff14; /* Неоновый цвет текста */
+  text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; /* Неоновый эффект */
+  display: inline-block; /* Позволяет использовать margin */
+  margin-bottom: 10px; /* Отступ снизу */
+  animation: slideIn 1s ease forwards; /* Анимация выползания */
+  text-decoration: none; /* Убрать подчеркивание */
+}
+
+/* Анимация выползания с 3D-эффектом */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-50%) rotateX(45deg); /* Начальная позиция */
+    opacity: 0; /* Начальная прозрачность */
+  }
+  100% {
+    transform: translateY(0) rotateX(0); /* Конечная позиция */
+    opacity: 1; /* Конечная прозрачность */
+  }
 }
 
 /* Стили для навигации */
-nav {
-  margin: 20px 0;
+.nav-bar {
+  display: flex; /* Flexbox */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  gap: 10px; /* Отступ между элементами */
 }
 
-nav a {
-  margin: 0 10px;
-  color: #ff8c00; /* Цвет для ссылок */
-  text-decoration: none; /* Стёр подчеркиваение уебское */
-}
-
-nav a:hover {
-  text-decoration: underline; /* Подчеркивание для анимации ХЗХЗ*/
-}
-
-/* Формы  */
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-input {
-  margin-bottom: 15px;
+.search-bar {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+  color: #ffffff; /* Цвет текста */
+  width: 200px; /* Ширина поля поиска */
+  transition: background-color 0.3s ease; /* Плавный переход фона */
+}
+
+.search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.5); /* Фон при фокусе */
+  outline: none; /* Убрать контур */
+}
+
+/* Стили для ссылок в навигации */
+nav {
+  display: flex; /* Flex для кнопок */
+  flex-direction: column; /* В столбик */
+  align-items: flex-end; /* Выравнивание по правому краю */
+  gap: 10px; /* Отступ между кнопками */
+  margin: 20px 0; /* Отступ сверху и снизу */
+}
+
+/* Стили для ссылок в навигации */
+nav a {
+  display: flex; /* Flex для кнопок */
+  justify-content: center; /* Центрирование текста по горизонтали */
+  align-items: center; /* Центрирование текста по вертикали */
+  padding: 10px 20px; /* Отступ для кнопок, чтоб был одинаковый */
+  background-color: rgba(0, 255, 255, 0.14); /* Фон кнопок */
+  color: #ffffff; /* Цвет текста */
+  border-radius: 5px; /* Углы покруглее */
+  font-weight: bold; /* Жирный текст */
+  transition: background-color 0.3s ease; /* Анимация при наведении */
+  width: 150px; /* Фиксированная ширина кнопок */
+  text-align: center; /* Текст по центру кнопок */
+  text-decoration: none; /* Убрать подчеркивание */
+}
+
+/* Убедитесь, что подчеркивание убрано и при наведении */
+nav a:hover {
+  background-color: rgba(0, 247, 255, 0.84); /* Цвет при наведении */
+  text-decoration: none; /* Убрать подчеркивание при наведении */
+}
+
+/* Формы */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px; /* Максимальная ширина формы */
+  margin: 0 auto; /* Центрирование формы */
+}
+
+input {
+  margin-bottom: 15px; /* Отступ снизу */
+  padding: 10px; /* Отступ внутри */
+  border: 1px solid #ccc; /* Граница */
+  border-radius: 5px; /* Углы покруглее */
 }
 
 button {
-  padding: 10px;
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 10px; /* Отступ внутри кнопки */
+  background-color: #ff8c00; /* Цвет фона */
+  color: white; /* Цвет текста */
+  border: none; /* Убираем границу */
+  border-radius: 5px; /* Углы покруглее */
+  cursor: pointer; /* Курсор при наведении */
 }
 
 button:hover {
-  background-color: #ffa500; /* Темнушка для анимации ХЗ.. */
+  background-color: rgb(255, 165, 0); /* Цвет фона при наведении */
 }
 
 /* Обертка блоков */
 .blocks-container {
-  display: flex;
-  flex-wrap: wrap; /* блоки на новую строку */
-  justify-content: space-around; /* распределение блоков в конт */
-  padding: 20px;
+  display: flex; /* Flexbox */
+  flex-wrap: wrap; /* Блоки на новую строку */
+  justify-content: space-around; /* Распределение блоков в контейнере */
+  padding: 20px; /* Отступ внутри контейнера */
 }
 
 /* Блоки */
 .block {
-  background-color: rgba(30, 30, 30, 0.85); /* полупрозрачный фон для */
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  width: calc(30% - 20px); /* ВАЖНО!! ширина для 3 хуевин */
-  text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
-  cursor: pointer;
+  background-color: rgba(30, 30, 30, 0.85); /* Полупрозрачный фон */
+  color: #ffffff; /* Цвет текста */
+  padding: 20px; /* Отступ внутри блока */
+  border-radius: 15px; /* Углы покруглее */
+  width: calc(30% - 20px); /* Ширина для 3 колонок */
+  text-align: center; /* Центрирование текста */
+  transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
+  cursor: pointer; /* Курсор при наведении */
   margin-bottom: 20px; /* Отступ между рядами */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
 }
 
 .block:hover {
-  background-color: rgba(60, 60, 60, 0.8);
-  transform: translateY(-5px); /* для динамики при наведении */
+  background-color: rgba(60, 60, 60, 0.8); /* Цвет фона при наведении */
+  transform: translateY(-5px); /* Подъем блока при наведении */
 }
 
 /* Иконки в блоках */
@@ -92,15 +156,32 @@ button:hover {
   margin-right: 8px; /* Отступ между иконкой и текстом */
 }
 
-/* опять для адапта */
+/* Адаптивные стили */
 @media (max-width: 768px) {
   .block {
-    width: calc(45% - 20px); /* мелкие экры в 2 столба */
+    width: calc(45% - 20px); /* Мелкие экраны в 2 столба */
   }
 }
 
 @media (max-width: 480px) {
   .block {
-    width: calc(100% - 20px); /*TODO супермелкие в 1 (ТОЖЕ ОБДУМАТЬ ) */
+    width: calc(100% - 20px); /* Супермелкие в 1 столбец */
   }
+}
+
+/* Кнопки аутентификации */
+.auth-button {
+  display: inline-block; /* Инлайн-блок */
+  padding: 10px 20px; /* Отступы */
+  margin: 0 10px; /* Отступ между кнопками */
+  background-color: rgba(0, 255, 255, 0.14); /* Фон кнопок */
+  color: #ffffff; /* Цвет текста */
+  border-radius: 5px; /* Углы покруглее */
+  font-weight: bold; /* Жирный текст */
+  transition: background-color 0.3s ease; /* Анимация изменения фона */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.auth-button:hover {
+  background-color: rgba(0, 247, 255, 0.84); /* Цвет при наведении */
 }
