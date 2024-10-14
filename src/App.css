@@ -1,187 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 /* Основные стили */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   color: #ffffff;
-  background-color: #121212; /* Темный фон */
-  background-image: url('/src/images/markus-spiske-GXBF7vaC6L8-unsplash.jpg'); /* Картинка фона главного */
-  background-size: cover; /* Заполнение фона */
-  background-position: center;
+  background-color: #000000; /* Чёрный фон */
+  overflow: hidden; /* Отключаем скроллинг для фона */
+  position: relative;
 }
 
-/* Шапка */
+/* Эффект бегущего текста */
+@keyframes moveText {
+  0% {
+    transform: translateY(100%); /* Начальная позиция за нижней границей */
+  }
+  100% {
+    transform: translateY(-100%); /* Конечная позиция за верхней границей */
+  }
+}
+
+.running-code {
+  position: absolute;
+  white-space: nowrap; /* Запрет переноса строк */
+  font-family: 'Courier New', monospace;
+  font-size: 24px;
+  color: #39ff14; /* Цвет текста */
+  opacity: 0.8; /* Прозрачность */
+  animation: moveText 10s linear infinite; /* Анимация */
+}
+
+/* Размещение нескольких строк кода */
+.code-line {
+  position: absolute;
+  width: 100%;
+  opacity: 0.7;
+}
+
+.line1 {
+  top: 10%; /* Расположение первой линии */
+  animation-delay: 0s; /* Без задержки */
+}
+
+.line2 {
+  top: 30%; /* Расположение второй линии */
+  animation-delay: 2s; /* Задержка на 2 секунды */
+}
+
+.line3 {
+  top: 50%; /* Расположение третьей линии */
+  animation-delay: 4s; /* Задержка на 4 секунды */
+}
+
+.line4 {
+  top: 70%; /* Расположение четвёртой линии */
+  animation-delay: 6s; /* Задержка на 6 секунд */
+}
+
+.line5 {
+  top: 90%; /* Расположение пятой линии */
+  animation-delay: 8s; /* Задержка на 8 секунд */
+}
+
+/* Анимация неонового заголовка */
+@keyframes neonFlicker {
+  0%, 100% { text-shadow: 0 0 5px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; }
+  50% { text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14; }
+}
+
+/* Глитч эффект для заголовка */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Анимация появления элементов */
+@keyframes pixelReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Эффект свечения */
+.neon-effect {
+  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+}
+
+/* Основная тема шапки */
 .App-header {
-  background-color: rgba(30, 30, 30, 0.8); /* Полупрозрачный фон */
-  padding: 5px; /* Отступы */
-  text-align: center; /* Центрирование текста */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Тень */
+  background-color: #1a1a1a; /* Темный фон */
+  padding: 15px;
+  text-align: center;
+  box-shadow: inset 0 0 0 4px #39ff14;
+  border-bottom: 4px solid #39ff14;
+  animation: pixelReveal 1s ease-in-out forwards;
 }
 
 /* Заголовок */
 .header-title {
-  font-size: 48px; /* Размер текста */
-  font-weight: bolder; /* Увеличенная жирность текста */
-  text-transform: uppercase; /* Заглавные буквы */
-  color: #39ff14; /* Неоновый цвет текста */
-  text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; /* Неоновый эффект */
-  display: inline-block; /* Позволяет использовать margin */
-  margin-bottom: 10px; /* Отступ снизу */
-  animation: slideIn 1s ease forwards; /* Анимация выползания */
-  text-decoration: none; /* Убрать подчеркивание */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+  color: #39ff14;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
+  display: inline-block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  animation: neonFlicker 1.5s infinite alternate, glitch 0.2s infinite;
 }
 
-/* Анимация выползания с 3D-эффектом */
-@keyframes slideIn {
-  0% {
-    transform: translateY(-50%) rotateX(45deg); /* Начальная позиция */
-    opacity: 0; /* Начальная прозрачность */
-  }
-  100% {
-    transform: translateY(0) rotateX(0); /* Конечная позиция */
-    opacity: 1; /* Конечная прозрачность */
-  }
-}
-
-/* Стили для навигации */
+/* Навигационная панель */
 .nav-bar {
-  display: flex; /* Flexbox */
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center; /* Центрирование по вертикали */
-  gap: 10px; /* Отступ между элементами */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  animation: pixelReveal 1s ease-in-out 0.5s forwards;
 }
 
+/* Поле поиска */
 .search-bar {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
-  color: #ffffff; /* Цвет текста */
-  width: 200px; /* Ширина поля поиска */
-  transition: background-color 0.3s ease; /* Плавный переход фона */
+  border: 2px solid #39ff14;
+  background-color: #121212;
+  color: #39ff14;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  width: 150px;
+  transition: background-color 0.3s ease;
+  animation: pixelReveal 1s ease-in-out 1s forwards;
 }
 
 .search-bar:focus {
-  background-color: rgba(255, 255, 255, 0.5); /* Фон при фокусе */
-  outline: none; /* Убрать контур */
+  background-color: #1a1a1a;
+  outline: none;
 }
 
-/* Стили для ссылок в навигации */
-nav {
-  display: flex; /* Flex для кнопок */
-  flex-direction: column; /* В столбик */
-  align-items: flex-end; /* Выравнивание по правому краю */
-  gap: 10px; /* Отступ между кнопками */
-  margin: 20px 0; /* Отступ сверху и снизу */
-}
-
-/* Стили для ссылок в навигации */
-nav a {
-  display: flex; /* Flex для кнопок */
-  justify-content: center; /* Центрирование текста по горизонтали */
-  align-items: center; /* Центрирование текста по вертикали */
-  padding: 10px 20px; /* Отступ для кнопок, чтоб был одинаковый */
-  background-color: rgba(0, 255, 255, 0.14); /* Фон кнопок */
-  color: #ffffff; /* Цвет текста */
-  border-radius: 5px; /* Углы покруглее */
-  font-weight: bold; /* Жирный текст */
-  transition: background-color 0.3s ease; /* Анимация при наведении */
-  width: 150px; /* Фиксированная ширина кнопок */
-  text-align: center; /* Текст по центру кнопок */
-  text-decoration: none; /* Убрать подчеркивание */
-}
-
-/* Убедитесь, что подчеркивание убрано и при наведении */
-nav a:hover {
-  background-color: rgba(0, 247, 255, 0.84); /* Цвет при наведении */
-  text-decoration: none; /* Убрать подчеркивание при наведении */
-}
-
-/* Формы */
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px; /* Максимальная ширина формы */
-  margin: 0 auto; /* Центрирование формы */
-}
-
-input {
-  margin-bottom: 15px; /* Отступ снизу */
-  padding: 10px; /* Отступ внутри */
-  border: 1px solid #ccc; /* Граница */
-  border-radius: 5px; /* Углы покруглее */
-}
-
-button {
-  padding: 10px; /* Отступ внутри кнопки */
-  background-color: #ff8c00; /* Цвет фона */
-  color: white; /* Цвет текста */
-  border: none; /* Убираем границу */
-  border-radius: 5px; /* Углы покруглее */
-  cursor: pointer; /* Курсор при наведении */
-}
-
-button:hover {
-  background-color: rgb(255, 165, 0); /* Цвет фона при наведении */
-}
-
-/* Обертка блоков */
-.blocks-container {
-  display: flex; /* Flexbox */
-  flex-wrap: wrap; /* Блоки на новую строку */
-  justify-content: space-around; /* Распределение блоков в контейнере */
-  padding: 20px; /* Отступ внутри контейнера */
-}
-
-/* Блоки */
-.block {
-  background-color: rgba(30, 30, 30, 0.85); /* Полупрозрачный фон */
-  color: #ffffff; /* Цвет текста */
-  padding: 20px; /* Отступ внутри блока */
-  border-radius: 15px; /* Углы покруглее */
-  width: calc(30% - 20px); /* Ширина для 3 колонок */
-  text-align: center; /* Центрирование текста */
-  transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
-  cursor: pointer; /* Курсор при наведении */
-  margin-bottom: 20px; /* Отступ между рядами */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
-}
-
-.block:hover {
-  background-color: rgba(60, 60, 60, 0.8); /* Цвет фона при наведении */
-  transform: translateY(-5px); /* Подъем блока при наведении */
-}
-
-/* Иконки в блоках */
-.block h2 i {
-  margin-right: 8px; /* Отступ между иконкой и текстом */
-}
-
-/* Адаптивные стили */
-@media (max-width: 768px) {
-  .block {
-    width: calc(45% - 20px); /* Мелкие экраны в 2 столба */
-  }
-}
-
-@media (max-width: 480px) {
-  .block {
-    width: calc(100% - 20px); /* Супермелкие в 1 столбец */
-  }
-}
-
-/* Кнопки аутентификации */
+/* Пиксельные кнопки */
 .auth-button {
-  display: inline-block; /* Инлайн-блок */
-  padding: 10px 20px; /* Отступы */
-  margin: 0 10px; /* Отступ между кнопками */
-  background-color: rgba(0, 255, 255, 0.14); /* Фон кнопок */
-  color: #ffffff; /* Цвет текста */
-  border-radius: 5px; /* Углы покруглее */
-  font-weight: bold; /* Жирный текст */
-  transition: background-color 0.3s ease; /* Анимация изменения фона */
-  text-decoration: none; /* Убираем подчеркивание */
+  padding: 10px;
+  background-color: #39ff14;
+  color: #1a1a1a;
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+  animation: pixelReveal 1s ease-in-out 1.5s forwards;
 }
 
 .auth-button:hover {
-  background-color: rgba(0, 247, 255, 0.84); /* Цвет при наведении */
+  background-color: #2ecc71;
+  color: #ffffff;
+}
+
+/* Светлая тема */
+.light-theme {
+  background-color: #ffffff; /* Светлый фон */
+  color: #000000; /* Тёмный текст */
+}
+
+.light-theme .App-header {
+  background-color: #f8f8f8; /* Светлый фон шапки */
+  box-shadow: inset 0 0 0 4px #2ecc71;
+  border-bottom: 4px solid #2ecc71;
+}
+
+.light-theme .header-title {
+  color: #2ecc71;
+  text-shadow: none; /* Убираем тень */
+}
+
+.light-theme .auth-button {
+  background-color: #2ecc71;
+  color: #ffffff;
+  border: 2px solid #000;
+}
+
+.light-theme .auth-button:hover {
+  background-color: #27ae60;
+}
+
+/* Фоновое изображение с пиксельной темой */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://your-image-url.com/pixel-background.png') repeat; /* Замените на свое изображение */
+  opacity: 0.1; /* Прозрачность изображения */
+  z-index: -1; /* Помещаем фон за остальными элементами */
+}
+
+body:hover::before {
+  animation: pixelBackgroundMove 30s infinite linear; /* Анимация движения фона */
+}
+
+@keyframes pixelBackgroundMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
 }
