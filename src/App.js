@@ -1,31 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
-import AboutPage from './components/AboutPage';
-import ConsultationPage from './components/ConsultationPage';
-import ContactPage from './components/ContactPage';
-import EventsPage from './components/EventsPage';
-import FAQPage from './components/FAQPage';
-import ForumPage from './components/ForumPage';
-import ReviewsPage from './components/ReviewsPage';
+import { search as searchDocuments } from './search'; // Импортируем функцию поиска
+
+// Динамическая загрузка компонентов
+const HomePage = lazy(() => import('./components/HomePage'));
+const LoginPage = lazy(() => import('./components/LoginPage'));
+const AboutPage = lazy(() => import('./components/AboutPage'));
+const ConsultationPage = lazy(() => import('./components/ConsultationPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const EventsPage = lazy(() => import('./components/EventsPage'));
+const FAQPage = lazy(() => import('./components/FAQPage'));
+const ForumPage = lazy(() => import('./components/ForumPage'));
+const ReviewsPage = lazy(() => import('./components/ReviewsPage'));
+
+// Функция для дебаунса
+const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+    return debouncedValue;
+};
 
 function App() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [theme, setTheme] = useState('dark'); // Смена темы
+    const debouncedQuery = useDebounce(searchQuery, 300);
+
+    const pages = [
+        { path: "/", name: "Главная", component: <HomePage /> },
+        { path: "/login", name: "Вход", component: <LoginPage /> },
+        { path: "/about", name: "О нас", component: <AboutPage /> },
+        { path: "/consultation", name: "Консультации", component: <ConsultationPage /> },
+        { path: "/contacts", name: "Контакты", component: <ContactPage /> },
+        { path: "/events", name: "События", component: <EventsPage /> },
+        { path: "/faq", name: "Часто задаваемые вопросы", component: <FAQPage /> },
+        { path: "/forum", name: "Форум", component: <ForumPage /> },
+        { path: "/reviews", name: "Отзывы", component: <ReviewsPage /> },
+    ];
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
+        console.log("Search query:", event.target.value);
     };
 
-    const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-    };
+    // Фильтрация страниц
+    const filteredPages = searchDocuments(debouncedQuery); // Используем функцию поиска
 
     return (
         <Router>
-            <div className={`App ${theme === 'light' ? 'light-theme' : ''}`}>
+            <div className="App">
                 <header className="App-header">
                     <Link to="/" className="header-title">QA Helper Platform</Link>
                     <div className="nav-bar">
@@ -42,24 +71,32 @@ function App() {
                     </div>
                 </header>
 
-                <button onClick={toggleTheme} className="auth-button">Переключить тему</button>
-
-                {/* Убрано всё, что находилось в .running-code */}
-                <div className="running-code">
-                    {/* Код удалён */}
+                <div className="search-results">
+                    {debouncedQuery && filteredPages.length === 0 && (
+                        <div>Ничего не найдено</div>
+                    )}
+                    {debouncedQuery && filteredPages.length > 0 && (
+                        <div>
+                            <h2>Результаты поиска:</h2>
+                            <ul>
+                                {filteredPages.map((page, index) => (
+                                    <li key={index}>
+                                        <Link to={page.path}>{page.name}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
 
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/consultation" element={<ConsultationPage />} />
-                    <Route path="/contacts" element={<ContactPage />} />
-                    <Route path="/events" element={<EventsPage />} />
-                    <Route path="/faq" element={<FAQPage />} />
-                    <Route path="/forum" element={<ForumPage />} />
-                    <Route path="/reviews" element={<ReviewsPage />} />
-                </Routes>
+                <Suspense fallback={<div>Загрузка...</div>}>
+                    <Routes>
+                        {pages.map(page => (
+                            <Route key={page.path} path={page.path} element={page.component} />
+                        ))}
+                        <Route path="*" element={<div>Ничего не найдено</div>} />
+                    </Routes>
+                </Suspense>
             </div>
         </Router>
     );
