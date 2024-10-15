@@ -4,7 +4,6 @@ import './App.css';
 import { fetchItems } from './api';
 import { search as searchDocuments } from './search';
 
-
 const HomePage = lazy(() => import('./components/HomePage'));
 const LoginPage = lazy(() => import('./components/LoginPage'));
 const AboutPage = lazy(() => import('./components/AboutPage'));
@@ -37,7 +36,7 @@ const SearchResults = React.memo(({ debouncedQuery, loading, filteredPages, onRe
             <h2>Результаты поиска:</h2>
             <ul>
                 {filteredPages.map(page => (
-                    <li key={page.path}>
+                    <li key={page.id}>
                         <Link to={page.path} onClick={onResultClick}>{page.name}</Link>
                     </li>
                 ))}
@@ -67,6 +66,7 @@ function App() {
             try {
                 const data = await fetchItems();
                 if (isMounted) setItems(data);
+                console.log("Fetched items:", data); // Проверка данных
             } catch (err) {
                 console.error('Ошибка при получении данных:', err);
                 if (isMounted) setError('Ошибка при получении данных');
@@ -82,7 +82,6 @@ function App() {
 
     const filteredPages = searchDocuments(debouncedQuery, items);
     
-    // Функция для обработки клика по результату поиска
     const handleResultClick = () => {
         setSearchQuery(''); // Очищаем строку поиска
     };
@@ -129,7 +128,7 @@ function App() {
                         debouncedQuery={debouncedQuery} 
                         loading={loading} 
                         filteredPages={filteredPages} 
-                        onResultClick={handleResultClick} // Передаем функцию
+                        onResultClick={handleResultClick} 
                     />
                 </div>
 

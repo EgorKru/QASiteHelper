@@ -11,10 +11,10 @@ const documents = [
 ];
 
 // Функция для поиска
-export const search = (query) => {
-    return documents.filter(doc =>
-        doc.name.toLowerCase().includes(query.toLowerCase()) ||
-        doc.content.toLowerCase().includes(query.toLowerCase())
+export const search = (query, items) => {
+    return items.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
     );
 };
+
 
