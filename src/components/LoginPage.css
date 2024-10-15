@@ -78,28 +78,45 @@ button {
 
 button:hover {
     background-color: #2ecc71;
-    transform: scale(1.05);
-}
-
-button:active {
-    transform: scale(0.95);
-    box-shadow: inset 0 0 10px #00ff00;
 }
 
 .toggle-password {
     position: absolute;
-    right: 10px;               
-    top: 50%;                  
-    transform: translateY(-50%); 
-    background: none;         
-    border: none;             
-    color: #39ff14;           
-    cursor: pointer;          
-    width: 24px;              
-    height: 24px;             
-    padding: 0;               
-    margin: 0;                
+    right: 10px;               /* Расположение справа */
+    top: 50%;                  /* Вертикальное центрирование */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+    background: none;         /* Без фона */
+    border: none;             /* Без рамки */
+    color: #39ff14;           /* Цвет иконки */
+    cursor: pointer;          /* Указатель на кнопку */
+
+    /* Установка фиксированных размеров */
+    width: 24px;              /* Ширина кнопки */
+    height: 24px;             /* Высота кнопки */
+    
+    padding: 0;               /* Убираем внутренние отступы */
+    margin: 0;                /* Убираем внешние отступы */
+    
+    /* Убираем эффекты */
+    transition: none;         /* Убираем переходы */
 }
+
+.toggle-password:focus,
+.toggle-password:hover {
+    outline: none;            /* Убираем контур при фокусе */
+    background: none;        /* Убираем фон при наведении */
+    color: #39ff14;          /* Убедитесь, что цвет остается прежним */
+}
+
+/* Дополнительно: уберите возможные изменения в icon */
+.icon {
+    display: block;           /* Убедитесь, что иконка ведет себя как блочный элемент */
+    width: 100%;             /* Занимает всю ширину кнопки */
+    height: auto;            /* Высота авто, чтобы сохранить пропорции */
+}
+
+
+
 
 
 .status-message {
