@@ -1,85 +1,132 @@
-/* Основной контейнер для страницы входа */
 .login-container {
-    max-width: 400px; /* Максимальная ширина контейнера */
-    margin: 0 auto; /* Центрирование контейнера */
-    padding: 20px; /* Внутренние отступы */
-    border: 2px solid #ffcc00; /* Желтая рамка */
-    border-radius: 8px; /* Закругление углов */
-    background-color: #f9f9f9; /* Светлый фон */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-/* Заголовок страницы */
 .login-container h2 {
-    text-align: center; /* Центрирование текста */
-    margin-bottom: 20px; /* Отступ снизу */
-    color: #00ff00; /* Зеленый цвет текста */
-    font-family: 'Press Start 2P', cursive; /* Шрифт */
-    font-size: 24px; /* Размер шрифта */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00ff00;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
 }
 
-/* Контейнер для каждого поля ввода */
+.neon-background {
+    background: linear-gradient(45deg, rgba(57, 255, 20, 0.5), rgba(0, 255, 255, 0.5));
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
 .input-container {
-    position: relative; /* Позволяет позиционировать метку относительно поля ввода */
-    margin: 10px 0; /* Отступы сверху и снизу */
+    margin: 10px 0;
+    position: relative;
 }
 
-/* Стили для полей ввода */
 .input {
-    width: 100%; /* Ширина 100% */
-    padding: 10px; /* Внутренние отступы */
-    border: 2px solid #000; /* Черная рамка */
-    border-radius: 0; /* Без закруглений */
-    font-family: 'Press Start 2P', cursive; /* Шрифт */
-    font-size: 16px; /* Размер шрифта */
-    transition: border-color 0.3s ease; /* Плавный переход цвета рамки */
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #39ff14;
+    background-color: #121212;
+    color: #39ff14;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    border-radius: 5px;
 }
 
-/* Стили для поля ввода при фокусе */
+.password-wrapper {
+    position: relative; /* Для позиционирования иконки */
+}
+
+.password-input {
+    padding-right: 40px; /* Добавляем пространство для иконки */
+}
+
 .input:focus {
-    border-color: #007bff; /* Синий цвет рамки при фокусе */
-    outline: none; /* Убираем стандартный контур */
+    outline: none;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
 }
 
-/* Сообщение об ошибке */
+::placeholder {
+    color: #39ff14;
+    opacity: 0.7;
+}
+
 .error-message {
-    color: red; /* Красный цвет текста */
-    font-size: 12px; /* Размер шрифта */
+    color: red;
+    margin-top: 5px;
 }
 
-/* Стили для кнопки */
 button {
-    width: 100%; /* Ширина 100% */
-    padding: 10px; /* Внутренние отступы */
-    background-color: #000; /* Черный фон */
-    color: #00ff00; /* Зеленый цвет текста */
-    border: 2px solid #00ff00; /* Зеленая рамка */
-    border-radius: 0; /* Без закруглений */
-    font-family: 'Press Start 2P', cursive; /* Шрифт */
-    font-size: 16px; /* Размер шрифта */
-    cursor: pointer; /* Указатель при наведении */
+    background-color: #39ff14;
+    color: #1a1a1a;
+    border: 2px solid #00ff00;
+    transition: transform 0.2s, background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
-/* Эффект при наведении на кнопку */
 button:hover {
-    background-color: #00ff00; /* Зеленый фон */
-    color: #000; /* Черный цвет текста */
+    background-color: #2ecc71;
+    transform: scale(1.05);
 }
 
-/* Стили для метки полей ввода */
-.field-label {
-    position: absolute; /* Абсолютное позиционирование */
-    left: 10px; /* Отступ слева */
-    top: 10px; /* Отступ сверху */
-    transition: all 0.3s ease; /* Плавный переход для трансформации */
-    pointer-events: none; /* Позволяет клику проходить через метку */
-    color: #000; /* Цвет метки */
+button:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px #00ff00;
 }
 
-/* Стили для метки при фокусе на поле ввода или если поле не пустое */
-.input:focus + .field-label,
-.input:not(:placeholder-shown) + .field-label {
-    transform: translateY(-20px); /* Поднимаем метку вверх */
-    opacity: 0; /* Делаем метку прозрачной */
-    font-size: 12px; /* Уменьшаем размер шрифта метки */
+.toggle-password {
+    position: absolute;
+    right: 10px;               
+    top: 50%;                  
+    transform: translateY(-50%); 
+    background: none;         
+    border: none;             
+    color: #39ff14;           
+    cursor: pointer;          
+    width: 24px;              
+    height: 24px;             
+    padding: 0;               
+    margin: 0;                
+}
+
+
+.status-message {
+    text-align: center;
+    color: #39ff14;
+    margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
+    animation: fadeIn 0.5s;
+}
+
+.progress-bar {
+    height: 5px;
+    background-color: #00ff00;
+    animation: loading 2s infinite;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 0; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

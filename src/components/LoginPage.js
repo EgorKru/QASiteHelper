@@ -1,59 +1,78 @@
-import React, { useState } from 'react'; // Импортируем React и useState
-import { Formik, Form, Field, ErrorMessage } from 'formik'; // Импортируем компоненты Formik
-import * as Yup from 'yup'; // Импортируем Yup для валидации
-import './LoginPage.css'; // Импортируем CSS для стилизации страницы входа
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import './LoginPage.css';
 
-// Компонент для страницы входа
 const LoginPage = () => {
-    // Определяем схему валидации с использованием Yup
+    const [loading, setLoading] = useState(false);
+    const [statusMessage, setStatusMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
     const validationSchema = Yup.object({
-        username: Yup.string().required('Имя пользователя обязательно'), // Поле обязательно
-        password: Yup.string().required('Пароль обязателен'), // Поле обязательно
+        username: Yup.string().required('Имя пользователя обязательно'),
+        password: Yup.string().required('Пароль обязателен'),
     });
 
-    // Обработчик для отправки формы
     const handleSubmit = (values) => {
-        console.log('Вход:', values); // Логируем значения для входа
-        // Логика для входа
+        setLoading(true);
+        setStatusMessage('');
+        console.log('Вход:', values);
+
+        // Симуляция асинхронного запроса
+        setTimeout(() => {
+            setLoading(false);
+            setStatusMessage('Вход успешен!'); // или 'Ошибка входа', если нужно
+        }, 2000);
     };
 
     return (
-        <div className="login-container"> {/* Контейнер для стилизации */}
-            <h2>Вход</h2> {/* Заголовок страницы */}
+        <div className="login-container neon-background">
+            <h2>Вход</h2>
+            {statusMessage && <div className="status-message">{statusMessage}</div>}
+            {loading && <div className="progress-bar"></div>}
             <Formik
-                initialValues={{ username: '', password: '' }} // Начальные значения полей формы
-                validationSchema={validationSchema} // Схема валидации
-                onSubmit={handleSubmit} // Обработчик при отправке формы
+                initialValues={{ username: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
             >
-                {() => (
+                {({ handleChange, setFieldTouched }) => (
                     <Form>
-                        {/* Поле для ввода имени пользователя */}
                         <div className="input-container">
                             <Field
                                 type="text"
-                                name="username" // Имя поля
-                                placeholder=" " // Пустой плейсхолдер
-                                className="input" // Класс для стилизации
+                                name="username"
+                                className="input"
+                                onBlur={(e) => {
+                                    setFieldTouched("username");
+                                    handleChange(e);
+                                }}
                             />
-                            <label className="field-label"> {/* Подпись к полю */}
-                                Имя пользователя
-                            </label>
-                            <ErrorMessage name="username" component="div" className="error-message" /> {/* Сообщение об ошибке */}
+                            <label className="field-label">Имя пользователя</label>
+                            <ErrorMessage name="username" component="div" className="error-message" />
                         </div>
-                        {/* Поле для ввода пароля */}
                         <div className="input-container">
-                            <Field
-                                type="password"
-                                name="password" // Имя поля
-                                placeholder=" " // Пустой плейсхолдер
-                                className="input" // Класс для стилизации
-                            />
-                            <label className="field-label"> {/* Подпись к полю */}
-                                Пароль
-                            </label>
-                            <ErrorMessage name="password" component="div" className="error-message" /> {/* Сообщение об ошибке */}
+                            <div className="password-wrapper">
+                                <Field
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    className="input password-input"
+                                />
+                                <button
+                                    type="button"
+                                    className="toggle-password"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                                </button>
+                            </div>
+                            <label className="field-label">Пароль</label>
+                            <ErrorMessage name="password" component="div" className="error-message" />
                         </div>
-                        <button type="submit">Войти</button> {/* Кнопка для отправки формы */}
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Загрузка...' : 'Войти'}
+                        </button>
                     </Form>
                 )}
             </Formik>
@@ -61,5 +80,4 @@ const LoginPage = () => {
     );
 };
 
-// Экспортируем компонент для использования в других частях приложения
 export default LoginPage;

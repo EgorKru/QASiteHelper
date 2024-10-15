@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Импорт шрифта "Press Start 2P" */
-@import url('https://fonts.googleapis.com/css?family=Exo:100'); /* Импорт шрифта "Exo" */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo:100');
 
-/*box-sizing для всех элементов */
 *,
 *::before,
 *::after {
@@ -9,234 +8,166 @@
 }
 
 html, body {
-  margin: 0; /* Убрал отступы */
-  padding: 0; /* Убрал внутренние отступы */
-  height: 100%; /* Макс высота */
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-/* Основные стили */
 body {
-  font-family: 'Arial', sans-serif; /* Главный шрифт */
+  font-family: 'Arial', sans-serif;
   color: #ffffff;
   background-color: #000000; 
-  overflow-y: auto; /* Выкл вертикал скролл фону */
-  position: relative; /* Чтоб размещать абсолютные элементы внутри */
+  overflow-y: auto;
+  position: relative;
 }
 
-/* Фоновая анимация */
-@keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px; /* Конечная позиция фона */
-  }
-}
-
-@keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px; /* Начальная позиция фона */
-  }
-}
-
-/* Настройка фона с изображением */
 body::before {
-  content: ''; /* Пустое содержимое для фона */
-  position: absolute; /* Абсолютное позиционирование */
-  top: 70px; /* Позиция фона начинается под шапкой */
+  content: '';
+  position: absolute; 
+  top: 70px; 
   left: 0; 
   width: 100%; 
-  height: calc(100vh - 70px); /* Высота страницы без шапки */
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC') repeat 0 0; /* Фоновое изображение с прозрачностью */
-  opacity: 0.1; /* Прозрачность изображения */
-  z-index: -1; /* Помещаем фон за остальными элементами */
-  animation: bg-scrolling 0.92s infinite linear; /* Анимация движения фона */
+  height: calc(100vh - 70px);
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(57, 255, 20, 0.5)); 
+  opacity: 0.1; 
+  z-index: -1; 
 }
 
-/* Эффект бегущего текста */
-@keyframes moveText {
-  0% {
-    transform: translateY(100%); /* Начальная позиция за нижней границей */
-  }
-  100% {
-    transform: translateY(-100%); /* Конечная позиция за верхней границей */
-  }
-}
-
-.running-code {
-  position: absolute; /* Абсолютное позиционирование */
-  top: 0; 
-  left: 0; 
-  width: 100%;
-  white-space: nowrap; /* Текст не переносится */
-  font-family: 'Courier New', monospace; /* Шрифт для кода */
-  font-size: 24px; /* Размер шрифта */
-  color: #39ff14; /* Цвет текста */
-  opacity: 0.8; /* Прозрачность */
-  z-index: 5; 
-  animation: moveText 10s linear infinite; /* Анимация бегущего текста */
-}
-
-/* Размещение нескольких строк кода */
-.code-line {
-  position: absolute; /* Абсолютное позиционирование */
-  width: 100%; /* Ширина 100% */
-  opacity: 0.7; /* Прозрачность */
-}
-
-.line1 { top: 10%; animation-delay: 0s; } 
-.line2 { top: 30%; animation-delay: 2s; } 
-.line3 { top: 50%; animation-delay: 4s; } 
-.line4 { top: 70%; animation-delay: 6s; } 
-.line5 { top: 90%; animation-delay: 8s; } 
-
-/* Анимация неонового заголовка */
 @keyframes neonFlicker {
-  0%, 100% { text-shadow: 0 0 5px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; } /* Свечение на старте и в конце */
-  50% { text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14; } /* Увеличение свечения в середине */
+  0%, 100% { text-shadow: 0 0 5px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; }
+  50% { text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14; }
 }
 
-/* Глитч эффект для заголовка */
-@keyframes glitch {
-  0% { transform: translate(0); } /* Исходное положение */
-  20% { transform: translate(-2px, -2px); } /* Небольшое смещение */
-  40% { transform: translate(2px, 2px); } /* Обратное смещение */
-  60% { transform: translate(-2px, 2px); } /* Небольшое смещение */
-  80% { transform: translate(2px, -2px); } /* Обратное смещение */
-  100% { transform: translate(0); } /* Возвращаемся в исходное положение */
-}
-
-/* Анимация появления элементов */
-@keyframes pixelReveal {
-  0% {
-    opacity: 0; /* Исходная прозрачность */
-    transform: scale(0); /* Исходный масштаб */
-  }
-  100% {
-    opacity: 1; /* Полная непрозрачность */
-    transform: scale(1); /* Полный масштаб */
-  }
-}
-
-/* Эффект свечения */
 .neon-effect {
-  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; /* Свечение вокруг элемента */
+  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
 }
 
-/* Основная тема шапки */
 .App-header {
-  background-color: #1a1a1a; /* Темный фон */
-  padding: 15px; /* Отступы */
-  text-align: center; /* Центрирование текста */
-  box-shadow: inset 0 0 0 4px #39ff14; /* Внутреннее свечение */
-  border-bottom: 4px solid #39ff14; /* Нижняя граница */
-  animation: pixelReveal 1s ease-in-out forwards; /* Анимация появления */
-  position: relative; /* Относительное позиционирование */
-  z-index: 10; /* Поднимаем шапку выше остальных элементов */
+  background-color: #1a1a1a;
+  padding: 15px;
+  text-align: center;
+  box-shadow: inset 0 0 0 4px #39ff14;
+  border-bottom: 4px solid #39ff14;
+  position: relative;
+  z-index: 10;
 }
 
-/* Заголовок */
 .header-title {
-  font-family: 'Press Start 2P', cursive; /* Шрифт для заголовка */
-  font-size: 24px; /* Размер шрифта */
-  color: #39ff14; /* Цвет текста */
-  text-transform: uppercase; /* Верхний регистр */
-  letter-spacing: 2px; /* Межбуквенный интервал */
-  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14; /* Эффект свечения */
-  display: inline-block; /* Блоковый элемент с поддержкой размеров */
-  margin-bottom: 10px; /* Отступ снизу */
-  text-decoration: none; /* Убираем подчеркивание */
-  animation: neonFlicker 1.5s infinite alternate, glitch 0.2s infinite; /* Анимация свечения и глитча */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+  color: #39ff14;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
+  display: inline-block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  animation: neonFlicker 1.5s infinite alternate;
 }
 
-/* Навигационная панель */
 .nav-bar {
-  display: flex; /* Flexbox для расположения элементов */
-  justify-content: space-between; /* Распределение пространства между элементами */
-  align-items: center; /* Вертикальное выравнивание */
-  gap: 20px; /* Промежуток между элементами */
-  animation: pixelReveal 1s ease-in-out 0.5s forwards; /* Анимация появления */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Поле поиска */
 .search-bar {
-  padding: 10px; /* Отступы */
-  border: 2px solid #39ff14; /* Рамка */
-  background-color: #121212; /* Фон для поля поиска */
-  color: #39ff14; /* Цвет текста */
-  font-family: 'Press Start 2P', cursive; /* Шрифт для поля поиска */
-  font-size: 14px; /* Размер шрифта */
-  width: 150px; /* Ширина поля поиска */
-  transition: background-color 0.3s ease; /* Плавный переход цвета фона */
-  animation: pixelReveal 1s ease-in-out 1s forwards; /* Анимация появления */
+  padding: 10px;
+  border: 2px solid #39ff14;
+  background-color: #121212;
+  color: #39ff14;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  width: 150px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* добавлено */
 }
 
 .search-bar:focus {
-  background-color: #1a1a1a; /* Изменение цвета фона при фокусе */
-  outline: none; /* Убираем рамку при фокусе */
+  background-color: #1a1a1a;
+  outline: none;
+  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14; /* добавлено эффект */
 }
 
-/* Пиксельные кнопки */
 .auth-button {
-  padding: 10px; /* Отступы */
-  background-color: #39ff14; /* Цвет кнопки */
-  color: #1a1a1a; /* Цвет текста */
-  font-family: 'Press Start 2P', cursive; /* Шрифт для кнопок */
-  border: 2px solid #000; /* Рамка */
-  text-transform: uppercase; /* Верхний регистр */
-  font-size: 12px; /* Размер шрифта */
-  text-decoration: none; /* Убираем подчеркивание */
-  cursor: pointer; /* Указатель при наведении */
-  transition: background-color 0.3s ease; /* Плавный переход цвета фона */
-  border-radius: 0; /* Убираем скругления */
-  animation: pixelReveal 1s ease-in-out 1.5s forwards; /* Анимация появления */
+  padding: 10px;
+  background-color: #39ff14;
+  color: #1a1a1a;
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s; /* добавлено */
+  border-radius: 0;
 }
 
 .auth-button:hover {
-  background-color: #2ecc71; /* Цвет кнопки при наведении */
-  color: #ffffff; /* Цвет текста при наведении */
+  background-color: #2ecc71;
+  color: #ffffff;
+  transform: scale(1.05); /* добавлено увеличение размера */
 }
 
-/* Результаты поиска */
 .search-results {
-  width: 100%; /* Ширина 100% */
-  max-width: 600px; /* Ограничение ширины для результатов */
-  margin-top: 20px; /* Отступ сверху */
-  background-color: #1a1a1a; /* Фон для результатов */
-  padding: 10px; /* Отступы */
-  border: none; /* Убираем рамку */
-  border-radius: 5px; /* Скруглённые углы */
-  z-index: 100; /* Убедитесь, что результаты выше всех других элементов */
-  position: relative; /* Относительное позиционирование */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  z-index: 100;
+  position: relative;
 }
 
 .search-results.hidden {
-  display: none; /* Полное скрытие блока результатов */
+  display: none;
 }
 
 .search-results ul {
-  list-style: none; /* Убираем маркеры списка */
-  padding: 0; /* Убираем отступы */
+  list-style: none;
+  padding: 0;
 }
 
 .search-results li {
-  margin: 10px 0; /* Отступы между элементами списка */
+  margin: 10px 0;
 }
 
 .search-results a {
-  color: #39ff14; /* Цвет ссылок */
-  text-decoration: none; /* Убираем подчеркивание */
-  cursor: pointer; /* Указатель при наведении */
+  color: #39ff14;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .search-results a:hover {
-  text-decoration: underline; /* Подчеркивание при наведении */
-}
-
-.search-link {
-  color: #39ff14; /* Цвет ссылки */
-  text-decoration: none; /* Убираем подчеркивание */
-  cursor: pointer; /* Указатель при наведении */
+  text-decoration: underline;
 }
 
 .highlight {
-  background-color: rgba(0, 255, 119, 0.73); /* Подсветка фона */
-  color: #000000; /* Цвет текста подсвеченной ссылки */
+  background-color: rgba(57, 255, 20, 0.2);
+  color: #000000;
 }
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100px;
+}
+
+.spinner {
+  border: 8px solid #39ff14;
+  border-top: 8px solid #39ff14;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360degh);}
+}
+
