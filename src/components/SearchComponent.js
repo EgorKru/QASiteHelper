@@ -1,48 +1,54 @@
-// src/components/SearchComponent.js
+import React, { useEffect, useState } from 'react';
+import { fetchSearchResults } from '../api';
+import SearchResults from './SearchResults'; // Импортируем компонент для результатов поиска
 
-import React, { useEffect, useState } from 'react'; // Импорт React и хуков
-import { fetchSearchResults } from '../api'; // Импортируем функцию для получения результатов поиска
-
-// Для отображения результатов поиска
 function SearchComponent() {
-    const [results, setResults] = useState([]); // Состояние для хранения результатов
-    const [loading, setLoading] = useState(true); // Состояние для индикатора загрузки
-    const [error, setError] = useState(null); // Состояние для хранения ошибок
+    const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(''); // Состояние для строки поиска
 
     useEffect(() => {
-        // Асинхронная функция для получения результатов
         const getResults = async () => {
-            setLoading(true); // Установка состояние загрузки
+            setLoading(true);
             try {
-                const data = await fetchSearchResults(); // Получение данныхъ с API
-                setResults(data); // Устанока результатов в состояние
+                const data = await fetchSearchResults();
+                setResults(data);
             } catch (err) {
-                setError(err); // Устанавливаем ошибку в состояние при возникновении
+                setError(err);
             } finally {
-                setLoading(false); // Завершение загрузку, независимо от результата
+                setLoading(false);
             }
         };
 
-        getResults(); // Вызов функции для получения результатов
-    }, []); // Пустой массив зависимостей означает, что эффект выполнится только один раз при монтировании
+        getResults();
+    }, []);
 
-    // Если данные загружаются, показываем индикатор загрузки
+    const handleResultClick = () => {
+        setSearchTerm(''); // Очищаем строку поиска
+    };
+
+    // Если данные загружаются
     if (loading) return <div>Загрузка...</div>;
-    // Если произошла ошибка, показываем сообщение об ошибке
+    // Если произошла ошибка
     if (error) return <div>Ошибка: {error.message}</div>;
 
     return (
         <div>
-            <h2>Результаты поиска</h2>
-            <ul>
-                {/* Отображаем список результатов */}
-                {results.map(result => (
-                    <li key={result.id}>{result.name}</li> // Каждому элементу списка присваиваем уникальный ключ
-                ))}
-            </ul>
+            <h2>Поиск</h2>
+            <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} // Устанавливаем значение из поля ввода
+            />
+            <SearchResults
+                debouncedQuery={searchTerm}
+                loading={loading}
+                filteredPages={results.filter(result => result.name.includes(searchTerm))} // Фильтрация результатов
+                onResultClick={handleResultClick} // Передаем функцию для обработки клика
+            />
         </div>
     );
 }
 
-// Экспортируем компонент для использования в других частях приложения
 export default SearchComponent;

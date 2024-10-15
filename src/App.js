@@ -4,6 +4,7 @@ import './App.css';
 import { fetchItems } from './api';
 import { search as searchDocuments } from './search';
 
+
 const HomePage = lazy(() => import('./components/HomePage'));
 const LoginPage = lazy(() => import('./components/LoginPage'));
 const AboutPage = lazy(() => import('./components/AboutPage'));
@@ -27,7 +28,7 @@ const useDebounce = (value, delay) => {
     return debouncedValue;
 };
 
-const SearchResults = React.memo(({ debouncedQuery, loading, filteredPages }) => {
+const SearchResults = React.memo(({ debouncedQuery, loading, filteredPages, onResultClick }) => {
     if (loading) return <div>Загрузка данных...</div>;
     if (debouncedQuery && filteredPages.length === 0) return <div className="no-results">Ничего не найдено</div>;
 
@@ -37,7 +38,7 @@ const SearchResults = React.memo(({ debouncedQuery, loading, filteredPages }) =>
             <ul>
                 {filteredPages.map(page => (
                     <li key={page.path}>
-                        <Link to={page.path}>{page.name}</Link>
+                        <Link to={page.path} onClick={onResultClick}>{page.name}</Link>
                     </li>
                 ))}
             </ul>
@@ -80,6 +81,12 @@ function App() {
     }, []);
 
     const filteredPages = searchDocuments(debouncedQuery, items);
+    
+    // Функция для обработки клика по результату поиска
+    const handleResultClick = () => {
+        setSearchQuery(''); // Очищаем строку поиска
+    };
+
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
@@ -122,6 +129,7 @@ function App() {
                         debouncedQuery={debouncedQuery} 
                         loading={loading} 
                         filteredPages={filteredPages} 
+                        onResultClick={handleResultClick} // Передаем функцию
                     />
                 </div>
 
