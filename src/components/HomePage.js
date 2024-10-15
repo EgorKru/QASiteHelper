@@ -1,15 +1,17 @@
 // src/components/HomePage.js
-import React from 'react';
-import './HomePage.css';
+import React from 'react'; // Импортируем React
+import './HomePage.css'; // Импортируем CSS для стилизации страницы
 
+// Компонент для главной страницы
 const HomePage = () => {
+    // Данные для блоков на главной странице
     const blocksData = [
         {
-            id: 'guides',
-            title: 'Руководства',
-            description: 'Теоретические материалы',
-            icon: 'fas fa-book',
-            link: '/guides',
+            id: 'guides', // Уникальный идентификатор блока
+            title: 'Руководства', // Заголовок блока
+            description: 'Теоретические материалы', // Описание блока
+            icon: 'fas fa-book', // Иконка блока (Font Awesome)
+            link: '/guides', // Ссылка на страницу
         },
         {
             id: 'trainers',
@@ -71,20 +73,20 @@ const HomePage = () => {
 
     return (
         <div>
-            <h2></h2>
-            <p></p>
-            <section className="blocks-container">
+            <h2></h2> {/* Заголовок страницы (можно добавить текст) */}
+            <p></p> {/* Описание страницы (можно добавить текст) */}
+            <section className="blocks-container"> {/* Контейнер для блоков */}
                 {blocksData.map(block => (
                     <div
-                        className="block"
-                        id={block.id}
-                        key={block.id}
-                        onClick={() => window.location.href = block.link} //переход по ссылке
+                        className="block" // Класс для стилизации блока
+                        id={block.id} // Уникальный идентификатор блока
+                        key={block.id} // Уникальный ключ для React
+                        onClick={() => window.location.href = block.link} // Переход по ссылке при клике
                     >
                         <h2>
-                            <i className={block.icon}></i> {block.title}
+                            <i className={block.icon}></i> {block.title} {/* Иконка и заголовок блока */}
                         </h2>
-                        <p>{block.description}</p>
+                        <p>{block.description}</p> {/* Описание блока */}
                     </div>
                 ))}
             </section>
@@ -92,4 +94,5 @@ const HomePage = () => {
     );
 };
 
+// Экспортируем компонент для использования в других частях приложения
 export default HomePage;
