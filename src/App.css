@@ -223,10 +223,17 @@ body::before {
 .search-results a {
   color: #39ff14;
   text-decoration: none; /* Убираем подчеркивание */
+  cursor: pointer; 
 }
 
 .search-results a:hover {
   text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.search-link {
+  color: #39ff14;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .highlight {

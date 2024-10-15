@@ -1,36 +1,57 @@
-// src/components/LoginPage.js
 import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import './LoginPage.css';
 
 const LoginPage = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const validationSchema = Yup.object({
+        username: Yup.string().required('Имя пользователя обязательно'),
+        password: Yup.string().required('Пароль обязателен'),
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        //TODO Логика для входа(НАДО ПРОДУМАТЬ)
-        console.log('Вход:', { username, password });
+    const handleSubmit = (values) => {
+        console.log('Вход:', values);
+        // Логика для входа
     };
 
     return (
-        <div>
+        <div className="login-container">
             <h2>Вход</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Имя пользователя"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Пароль"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Войти</button>
-            </form>
+            <Formik
+                initialValues={{ username: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {() => (
+                    <Form>
+                        <div className="input-container">
+                            <Field
+                                type="text"
+                                name="username"
+                                placeholder=" "
+                                className="input"
+                            />
+                            <label className="field-label">
+                                Имя пользователя
+                            </label>
+                            <ErrorMessage name="username" component="div" className="error-message" />
+                        </div>
+                        <div className="input-container">
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder=" "
+                                className="input"
+                            />
+                            <label className="field-label">
+                                Пароль
+                            </label>
+                            <ErrorMessage name="password" component="div" className="error-message" />
+                        </div>
+                        <button type="submit">Войти</button>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };

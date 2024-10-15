@@ -1,0 +1,75 @@
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ffcc00;
+    border-radius: 8px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00ff00;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+}
+
+.input-container {
+    position: relative;
+    margin: 10px 0;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+.error-message {
+    color: red; 
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000; 
+    color: #00ff00; 
+    border: 2px solid #00ff00; 
+    border-radius: 0; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00ff00; 
+    color: #000; 
+}
+
+.field-label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    transition: all 0.3s ease;
+    pointer-events: none; /* Позволяет клику проходить через метку */
+    color: #000; /* Цвет метки */
+}
+
+.input:focus + .field-label,
+.input:not(:placeholder-shown) + .field-label {
+    transform: translateY(-20px);
+    opacity: 0;
+    font-size: 12px;
+}
