@@ -3,9 +3,10 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
-  }
-  
-  .block {
+}
+
+/* Блоки */
+.block {
     background-color: rgba(30, 30, 30, 0.85);
     color: #ffffff;
     padding: 20px;
@@ -15,8 +16,10 @@
     transition: transform 0.2s, box-shadow 0.3s;
     cursor: pointer;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5
-  }
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    position: relative; /* Для псевдоэлемента */
+}
+
 /* Псевдоэлемент для неонового эффекта */
 .block::before {
     content: '';
@@ -87,19 +90,3 @@
         width: calc(100% - 20px);
     }
 }
-
-.block.hovered {
-    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.7); /* Яркая тень */
-  }
-  
-  .block.hovered::before {
-    opacity: 1; /* Показать неон */
-    animation: pulse 1.5s infinite; /* Пульсация при наведении */
-  }
-  
-  .block.hovered h2, 
-  .block.hovered p {
-    color: white; /* Ярко белый цвет текста при наведении */
-  }
-
-  

@@ -5,7 +5,7 @@ import { fetchItems } from './api';
 import { search } from './search';
 import SearchResults from './components/SearchResults'; // Добавьте этот импорт
 import * as Components from './components';
-import AboutPage from './components/AboutPage';
+import AboutPage from './components/PagesJS/AboutPage';
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
