@@ -1,0 +1,23 @@
+/* src/CompilerPage.css */
+.compiler-page {
+    padding: 20px;
+    background-color: #121212; /* Темный фон */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: #ffffff; /* Белый цвет текста */
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #00ff00; /* Зеленый цвет заголовка */
+}
+
+label {
+    color: #00ff00; /* Зеленый цвет для меток */
+}
+
+/* Стили для списка задач */
+.no-tasks-message {
+    color: #ffcc00; /* Желтый цвет для сообщений об отсутствии задач */
+}

@@ -2,6 +2,7 @@
 import React from 'react';
 import CodeEditor from './CodeEditor';
 import { useTasks } from './TaskContext';
+import './TaskDetail.css'; // Импортируем стили
 
 const TaskDetail = ({ selectedTaskId }) => {
     const { tasks } = useTasks();
@@ -12,9 +13,9 @@ const TaskDetail = ({ selectedTaskId }) => {
     }
 
     return (
-        <div>
-            <h2>{selectedTask.title}</h2>
-            <p>{selectedTask.description}</p>
+        <div className="task-detail-container">
+            <h2 className="task-detail-title">{selectedTask.title}</h2>
+            <p className="task-detail-description">{selectedTask.description}</p>
             <CodeEditor taskId={selectedTask.id} />
         </div>
     );

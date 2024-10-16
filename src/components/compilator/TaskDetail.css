@@ -1,0 +1,16 @@
+/* src/TaskDetail.css */
+.task-detail-container {
+    padding: 20px;
+    background-color: #121212; /* Темный фон */
+    color: #ffffff; /* Белый цвет текста */
+}
+
+.task-detail-title {
+    font-size: 28px;
+    color: #00ff00; /* Зеленый цвет заголовка */
+}
+
+.task-detail-description {
+    margin-top: 10px;
+    color: #ffffff; /* Белый текст для описания */
+}

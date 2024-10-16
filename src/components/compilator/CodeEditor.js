@@ -1,6 +1,15 @@
 // src/CodeEditor.js
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@monaco-editor/react';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Container,
+    Box,
+    CssBaseline,
+} from '@mui/material';
 import './CodeEditor.css';
 
 const CodeEditor = ({ taskId }) => {
@@ -21,9 +30,8 @@ const CodeEditor = ({ taskId }) => {
     };
 
     const handleRunCode = async () => {
-        setLoading(true); // Начинаем загрузку
+        setLoading(true);
 
-        // Проверяем, есть ли класс в коде
         const classPattern = /class\s+\w+/;
         let finalCode = code;
 
@@ -36,21 +44,25 @@ public class Main {
 }`;
         }
 
-        const response = await fetch('http://localhost:5001/execute', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ code: finalCode }),
-        });
+        try {
+            const response = await fetch('http://localhost:5001/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code: finalCode }),
+            });
 
-        const result = await response.json();
-        setLoading(false); // Завершаем загрузку
-
-        if (result.error) {
-            setOutput(`Ошибка: ${result.error}`);
-        } else {
-            setOutput(result.output);
+            const result = await response.json();
+            if (result.error) {
+                setOutput(`Ошибка: ${result.error}`);
+            } else {
+                setOutput(result.output);
+            }
+        } catch (error) {
+            setOutput(`Ошибка: ${error.message}`);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -61,19 +73,51 @@ public class Main {
     };
 
     return (
-        <div className="code-editor-container">
-            <Editor
-                height="70vh"
-                defaultLanguage="java"
-                value={code}
-                onChange={handleEditorChange}
-            />
-            <button onClick={handleRunCode} disabled={loading}>
-                {loading ? 'Выполнение...' : 'Запустить код'}
-            </button>
-            <button onClick={handleClearCode}>Очистить код</button>
-            {output && <pre>Результат:\n{output}</pre>}
-        </div>
+        <Container maxWidth="lg" sx={{ mt: 2 }}>
+            <CssBaseline />
+            <AppBar position="static" sx={{ backgroundColor: '#2D2D2D' }}>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1, color: '#00ff00' }}>
+                        Редактор кода
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        onClick={handleRunCode}
+                        disabled={loading}
+                        className="green-button" // Использование зеленой кнопки
+                    >
+                        {loading ? 'Выполнение...' : 'Запустить код'}
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        onClick={handleClearCode}
+                        className="green-button" // Использование зеленой кнопки
+                        sx={{ ml: 2 }}
+                    >
+                        Очистить код
+                    </Button>
+                </Toolbar>
+            </AppBar>
+            <Box sx={{ mt: 2 }}>
+                <Editor
+                    height="70vh"
+                    defaultLanguage="java"
+                    value={code}
+                    onChange={handleEditorChange}
+                    options={{
+                        selectOnLineNumbers: true,
+                        automaticLayout: true,
+                        fontSize: 14, // Настройте размер шрифта
+                        theme: 'vs-dark', // Тема редактора
+                    }}
+                />
+            </Box>
+            {output && (
+                <pre>
+                    Результат:\n{output}
+                </pre>
+            )}
+        </Container>
     );
 };
 
