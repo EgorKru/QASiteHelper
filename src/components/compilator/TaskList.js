@@ -1,13 +1,16 @@
+// src/TaskList.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTasks } from './TaskContext';
 
-const TaskList = ({ tasks, onSelectTask }) => {
-    const navigate = useNavigate(); // Хук для навигации
+const TaskList = () => {
+    const { tasks, setSelectedTask } = useTasks();
+    const navigate = useNavigate();
 
     const handleTaskClick = (task) => {
-        onSelectTask(task);
+        setSelectedTask(task);
         if (task.title === 'Основы Java') {
-            navigate('/compiler'); // Перенаправляем на компилятор
+            navigate('/compiler');
         }
     };
 
