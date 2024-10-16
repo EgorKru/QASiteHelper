@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo:100');
+
+:root {
+    --primary-color: #39ff14;
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --header-bg-color: #1a1a1a;
+    --highlight-bg-color: rgba(57, 255, 20, 0.2);
+    --neon-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+    --font-main: 'Arial', sans-serif;
+    --font-title: 'Press Start 2P', cursive;
+}
+
+.compiler-page {
+    display: flex;
+}
+
+.description {
+    width: 30%; /* Левый блок */
+    padding: 20px;
+    background-color: var(--header-bg-color);
+    border-radius: 5px;
+    margin-right: 20px;
+    box-shadow: var(--neon-shadow);
+}
+
+.modules-container {
+    width: 70%; /* Правый блок */
+    padding: 20px;
+    background-color: var(--header-bg-color);
+    border-radius: 5px;
+    box-shadow: var(--neon-shadow);
+}
+
+.modules-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.module-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--highlight-bg-color);
+    border-radius: 5px;
+    cursor: pointer; /* Показать, что это кликабельно */
+    transition: background-color 0.3s;
+}
+
+.module-item:hover {
+    background-color: rgba(57, 255, 20, 0.4);
+}

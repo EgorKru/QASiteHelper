@@ -1,4 +1,3 @@
-// src/CodeEditor.js
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@monaco-editor/react';
 import './CodeEditor.css';
@@ -21,9 +20,8 @@ const CodeEditor = ({ taskId }) => {
     };
 
     const handleRunCode = async () => {
-        setLoading(true); // Начинаем загрузку
+        setLoading(true);
 
-        // Проверяем, есть ли класс в коде
         const classPattern = /class\s+\w+/;
         let finalCode = code;
 
@@ -45,7 +43,7 @@ public class Main {
         });
 
         const result = await response.json();
-        setLoading(false); // Завершаем загрузку
+        setLoading(false);
 
         if (result.error) {
             setOutput(`Ошибка: ${result.error}`);

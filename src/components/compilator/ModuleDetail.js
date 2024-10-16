@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTasks } from './TaskContext';
 
-const TaskDetail = () => {
+const ModuleDetail = () => {
     const { selectedTask } = useTasks();
     const navigate = useNavigate();
 
@@ -24,11 +24,11 @@ const TaskDetail = () => {
     };
 
     return (
-        <div className="task-detail">
+        <div className="module-detail">
             <h2>{selectedTask.title}</h2>
             <p>
-                Этот модуль создан для того, чтобы ознакомиться с основами Java и восполнить потенциальные пробелы.
-                Мы также познакомимся с основными понятиями Java и объектно-ориентированного программирования.
+                Этот модуль сделан для того, чтобы ознакомиться с основами Java и восполнить потенциальные пробелы.
+                Также в этом модуле мы познакомимся с основными понятиями Java и объектно-ориентированного программирования.
             </p>
             <h3>Темы модуля:</h3>
             <ul>
@@ -42,4 +42,4 @@ const TaskDetail = () => {
     );
 };
 
-export default TaskDetail;
+export default ModuleDetail;
