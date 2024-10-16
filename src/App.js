@@ -8,7 +8,6 @@ import * as Components from './components';
 import AboutPage from './components/PagesJS/AboutPage';
 import LiveCodingTrainersPage from './components/InternalContentBlocks/LiveCodingTrainersPage';
 import CompilerPage from './components/compilator/CompilerPage'; // Импортируем компилятор
-import { tasksData } from './components/compilator/tasks';
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
