@@ -12,9 +12,14 @@ const documents = [
 
 // Функция для поиска
 export const search = (query, items) => {
+    if (!query) return items;
+
+    const lowerQuery = query.toLowerCase();
     return items.filter(item =>
-        item.name.toLowerCase().includes(query.toLowerCase())
+        item.title.toLowerCase().includes(lowerQuery) ||
+        item.description.toLowerCase().includes(lowerQuery)
     );
 };
+
 
 

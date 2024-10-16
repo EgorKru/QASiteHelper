@@ -2,8 +2,10 @@ import React, { useState, useEffect, Suspense, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import { fetchItems } from './api';
-import { search as searchDocuments } from './search';
+import { search } from './search';
+import SearchResults from './components/SearchResults'; // Добавьте этот импорт
 import * as Components from './components';
+import AboutPage from './components/AboutPage';
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -17,31 +19,6 @@ const useDebounce = (value, delay) => {
     }, [value, delay]);
     return debouncedValue;
 };
-
-const SearchResults = React.memo(({ debouncedQuery, loading, filteredPages, onResultClick }) => {
-    if (loading) return <div>Загрузка данных...</div>;
-    if (debouncedQuery && filteredPages.length === 0) return <div className="no-results">Ничего не найдено</div>;
-
-    return debouncedQuery ? (
-        <div aria-live="polite" className={`search-results ${filteredPages.length > 0 ? 'visible' : 'hidden'}`}>
-            <h2>Результаты поиска:</h2>
-            <ul>
-                {filteredPages.map(page => (
-                    <li key={page.id}>
-                        <Link to={page.path} onClick={onResultClick}>{page.name}</Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    ) : null;
-});
-
-const LoadingIndicator = () => (
-    <div className="loading-indicator">
-        <div className="spinner"></div>
-        <p>Загрузка...</p>
-    </div>
-);
 
 function App() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -57,7 +34,6 @@ function App() {
             try {
                 const data = await fetchItems({ signal: controller.signal });
                 setItems(data);
-                console.log("Fetched items:", data);
             } catch (err) {
                 if (err.name !== 'AbortError') {
                     console.error('Ошибка при получении данных:', err);
@@ -73,7 +49,7 @@ function App() {
         };
     }, []);
 
-    const filteredPages = searchDocuments(debouncedQuery, items);
+    const filteredPages = search(debouncedQuery, items);
 
     const handleResultClick = useCallback(() => {
         setSearchQuery('');
@@ -82,18 +58,6 @@ function App() {
     const handleSearchChange = useCallback((event) => {
         setSearchQuery(event.target.value);
     }, []);
-
-    const pages = [
-        { path: "/", name: "Главная", component: Components.HomePage },
-        { path: "/login", name: "Вход", component: Components.LoginPage },
-        { path: "/about", name: "О нас", component: Components.AboutPage },
-        { path: "/consultation", name: "Консультации", component: Components.ConsultationPage },
-        { path: "/contacts", name: "Контакты", component: Components.ContactPage },
-        { path: "/events", name: "События", component: Components.EventsPage },
-        { path: "/faq", name: "Часто задаваемые вопросы", component: Components.FAQPage },
-        { path: "/forum", name: "Форум", component: Components.ForumPage },
-        { path: "/reviews", name: "Отзывы", component: Components.ReviewsPage },
-    ];
 
     return (
         <Router>
@@ -117,22 +81,31 @@ function App() {
 
                 <div className="search-results-container">
                     {error && <div className="error-message">{error.message}</div>}
-                    <SearchResults 
-                        debouncedQuery={debouncedQuery} 
-                        loading={loading} 
-                        filteredPages={filteredPages} 
-                        onResultClick={handleResultClick} 
+                    <SearchResults
+                        debouncedQuery={debouncedQuery}
+                        loading={loading}
+                        filteredPages={filteredPages}
+                        onResultClick={handleResultClick}
                     />
                 </div>
 
-                <Suspense fallback={<LoadingIndicator />}>
-                    <Routes>
-                        {pages.map(({ path, component: Component }) => (
-                            <Route key={path} path={path} element={<Component />} />
-                        ))}
-                        <Route path="*" element={<div>Ничего не найдено</div>} />
-                    </Routes>
-                </Suspense>
+                <Suspense fallback={<div>Загрузка...</div>}>
+    <Routes>
+        <Route path="/" element={<Components.HomePage />} />
+        <Route path="/login" element={<Components.LoginPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/guides" element={<Components.GuidesPage />} />
+        <Route path="/trainers" element={<Components.TrainersPage />} />
+        <Route path="/tests" element={<Components.TestsPage />} />
+        <Route path="/courses" element={<Components.CoursesPage />} />
+        <Route path="/consultation" element={<Components.ConsultationPage />} />
+        <Route path="/events" element={<Components.EventsPage />} />
+        <Route path="/forum" element={<Components.ForumPage />} />
+        <Route path="/reviews" element={<Components.ReviewsPage />} />
+        <Route path="*" element={<div>Ничего не найдено</div>} />
+    </Routes>
+</Suspense>
+
             </div>
         </Router>
     );

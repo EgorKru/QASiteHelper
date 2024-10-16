@@ -1,5 +1,5 @@
-import React from 'react'; 
-import { Link } from 'react-router-dom'; 
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchResults = ({ debouncedQuery, loading, filteredPages, onResultClick }) => {
     if (loading) return <div>Загрузка данных...</div>;
@@ -11,13 +11,10 @@ const SearchResults = ({ debouncedQuery, loading, filteredPages, onResultClick }
             <div>
                 <h2>Результаты поиска:</h2>
                 <ul>
-                    {filteredPages.map((page, index) => (
-                        <li key={index}>
-                            <Link 
-                                to={page.path}
-                                onClick={() => onResultClick()} // Вызываем функцию при клике
-                            >
-                                {page.name}
+                    {filteredPages.map((page) => (
+                        <li key={page.id}>
+                            <Link to={page.link} onClick={onResultClick}>
+                                {page.title}
                             </Link>
                         </li>
                     ))}

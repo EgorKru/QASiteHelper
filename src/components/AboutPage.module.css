@@ -1,0 +1,77 @@
+:root {
+    --main-heading-color: #00ff00; /* Неоновый зеленый */
+    --main-paragraph-color: #999; /* Светло-серый */
+    --container-padding: 20px;
+    --heading-font-size: 24px;
+    --paragraph-line-height: 1.6;
+    --small-screen-font-size: 18px;
+    --small-screen-padding: 10px;
+}
+
+body {
+    background-color: #111; /* Темный фон */
+    color: #fff; /* Белый текст */
+    font-family: 'Arial', sans-serif;
+    margin: 0; /* Убираем отступы по умолчанию */
+    padding: 0; /* Убираем отступы по умолчанию */
+}
+
+.container {
+    padding: var(--container-padding);
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    color: var(--main-heading-color);
+    font-size: var(--heading-font-size);
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 0 0 5px var(--main-heading-color),
+                 0 0 10px var(--main-heading-color),
+                 0 0 15px var(--main-heading-color);
+}
+
+.paragraph {
+    color: var(--main-paragraph-color);
+    line-height: var(--paragraph-line-height);
+    text-align: justify;
+    margin-bottom: 15px; /* Отступ между параграфами */
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: var(--small-screen-padding);
+    }
+    .heading {
+        font-size: var(--small-screen-font-size);
+    }
+}
+
+.header {
+    background-color: #000;
+    padding: 10px;
+    border-bottom: 2px solid var(--main-heading-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .search,
+.header .login {
+    color: var(--main-heading-color);
+    border: 1px solid var(--main-heading-color);
+    padding: 5px 10px; /* Увеличенный внутренний отступ для кнопок */
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для интерактивных элементов */
+}
+
+.header .search:hover,
+.header .login:hover {
+    background-color: var(--main-heading-color);
+    color: #000; /* Темный текст при наведении */
+    cursor: pointer; /* Указатель при наведении */
+}
