@@ -6,7 +6,7 @@ const HomePage = () => {
 
   const blocksData = [
     { id: 'guides', title: 'Руководства', description: 'Теоретические материалы', icon: 'fas fa-book', link: '/guides' },
-    { id: 'trainers', title: 'Тренажеры', description: 'Потренироваться', icon: 'fas fa-dumbbell', link: '/trainers' },
+    { id: 'trainers', title: 'Тренажеры', description: 'Потренироваться', icon: 'fas fa-dumbbell', link: '/livecoding' },
     { id: 'tests', title: 'Тесты', description: 'Проверка знаний', icon: 'fas fa-tasks', link: '/tests' },
     { id: 'courses', title: 'Курсы', description: 'Список курсов (бесплатных и платных)', icon: 'fas fa-graduation-cap', link: '/courses' },
     { id: 'consultations', title: 'Консультации', description: 'Возможность бронирования консультаций с экспертами', icon: 'fas fa-chalkboard-teacher', link: '/consultation' },

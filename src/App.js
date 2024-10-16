@@ -6,6 +6,9 @@ import { search } from './search';
 import SearchResults from './components/SearchResults'; // Добавьте этот импорт
 import * as Components from './components';
 import AboutPage from './components/PagesJS/AboutPage';
+import LiveCodingTrainersPage from './components/InternalContentBlocks/LiveCodingTrainersPage';
+
+
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -103,6 +106,8 @@ function App() {
         <Route path="/forum" element={<Components.ForumPage />} />
         <Route path="/reviews" element={<Components.ReviewsPage />} />
         <Route path="*" element={<div>Ничего не найдено</div>} />
+        <Route path="/livecoding" element={<LiveCodingTrainersPage />} />
+
     </Routes>
 </Suspense>
 
