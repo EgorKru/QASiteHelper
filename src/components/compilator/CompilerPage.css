@@ -2,51 +2,53 @@
 @import url('https://fonts.googleapis.com/css?family=Exo:100');
 
 :root {
-    --primary-color: #39ff14;
-    --background-color: #000000;
-    --text-color: #ffffff;
-    --header-bg-color: #1a1a1a;
-    --highlight-bg-color: rgba(57, 255, 20, 0.2);
-    --neon-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
-    --font-main: 'Arial', sans-serif;
-    --font-title: 'Press Start 2P', cursive;
+    --primary-color: #39ff14; /* Основной цвет */
+    --background-color: #000000; /* Цвет фона */
+    --text-color: #ffffff; /* Цвет текста */
+    --header-bg-color: #1a1a1a; /* Цвет фона заголовка */
+    --highlight-bg-color: rgba(57, 255, 20, 0.2); /* Цвет выделения */
+    --neon-shadow: 0 0 10px var(--primary-color), 
+                   0 0 20px var(--primary-color), 
+                   0 0 30px var(--primary-color); /* Неоновая тень */
+    --font-main: 'Arial', sans-serif; /* Основной шрифт */
+    --font-title: 'Press Start 2P', cursive; /* Шрифт заголовка */
 }
 
 .compiler-page {
-    display: flex;
+    display: flex; /* Включает флекс-выравнивание для компилятора */
 }
 
 .description {
-    width: 30%; /* Левый блок */
+    width: 30%; /* Левый блок с описанием */
     padding: 20px;
     background-color: var(--header-bg-color);
     border-radius: 5px;
     margin-right: 20px;
-    box-shadow: var(--neon-shadow);
+    box-shadow: var(--neon-shadow); /* Применение неоновой тени */
 }
 
 .modules-container {
-    width: 70%; /* Правый блок */
+    width: 70%; /* Правый блок для модулей */
     padding: 20px;
     background-color: var(--header-bg-color);
     border-radius: 5px;
-    box-shadow: var(--neon-shadow);
+    box-shadow: var(--neon-shadow); /* Применение неоновой тени */
 }
 
 .modules-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Вертикальная ориентация списка модулей */
 }
 
 .module-item {
     padding: 10px;
-    margin: 5px 0;
-    background-color: var(--highlight-bg-color);
-    border-radius: 5px;
-    cursor: pointer; /* Показать, что это кликабельно */
-    transition: background-color 0.3s;
+    margin: 5px 0; /* Отступы между элементами */
+    background-color: var(--highlight-bg-color); /* Цвет фона для элемента */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор указывает на кликабельность */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
 
 .module-item:hover {
-    background-color: rgba(57, 255, 20, 0.4);
+    background-color: rgba(57, 255, 20, 0.4); /* Цвет фона при наведении */
 }

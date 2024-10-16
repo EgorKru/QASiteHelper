@@ -6,10 +6,12 @@ const ModuleDetail = () => {
     const { selectedTask } = useTasks();
     const navigate = useNavigate();
 
+    // Если задача не выбрана, выводим сообщение
     if (!selectedTask) {
         return <div>Выберите задачу из списка</div>;
     }
 
+    // Темы модуля
     const topics = [
         { id: '1', title: 'Введение в Java' },
         { id: '2', title: 'Переменные и типы данных' },
@@ -19,6 +21,7 @@ const ModuleDetail = () => {
         { id: '6', title: 'Объектно-ориентированное программирование' },
     ];
 
+    // Обработчик клика по теме
     const handleTopicClick = (topicId) => {
         navigate(`/topic/${topicId}`);
     };
@@ -33,7 +36,11 @@ const ModuleDetail = () => {
             <h3>Темы модуля:</h3>
             <ul>
                 {topics.map(topic => (
-                    <li key={topic.id} onClick={() => handleTopicClick(topic.id)} style={{ cursor: 'pointer', color: 'blue' }}>
+                    <li 
+                        key={topic.id} 
+                        onClick={() => handleTopicClick(topic.id)} 
+                        style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }} // Добавлен эффект подчеркивания
+                    >
                         {topic.title}
                     </li>
                 ))}

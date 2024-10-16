@@ -32,7 +32,6 @@ pre {
     padding: 10px;
 }
 
-/* Стили для заголовка редактора */
 .editor-header h2 {
     margin: 0;
     font-size: 1.2rem;
@@ -66,7 +65,7 @@ pre {
     transform: scale(1.05); /* Эффект увеличения */
 }
 
-/* Параметры для editor */
+/* Параметры для редактора */
 .editor {
     border: 1px solid #00ff00; /* Зелёная рамка */
     border-radius: 8px; /* Скругленные углы */

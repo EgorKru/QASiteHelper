@@ -1,27 +1,41 @@
 /* src/TaskList.css */
+
+/* Определение переменных CSS */
+:root {
+    --primary-green: #00ff00; /* Основной зеленый цвет */
+    --background-dark: #121212; /* Темный фон */
+    --white-color: #ffffff; /* Белый цвет текста */
+    --hover-background: rgba(0, 255, 0, 0.2); /* Светло-зеленый цвет при наведении */
+}
+
+/* Контейнер списка задач */
 .task-list-container {
     margin: 20px;
     padding: 10px;
-    border: 1px solid #00ff00; /* Основной зеленый цвет для рамки */
+    border: 1px solid var(--primary-green); /* Использование переменной для рамки */
     border-radius: 8px; /* Скругленные углы */
-    background-color: #121212; /* Темный фон */
+    background-color: var(--background-dark); /* Использование переменной для фона */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Заголовок списка задач */
 .task-list-title {
     font-size: 24px;
     margin-bottom: 10px;
-    color: #00ff00; /* Основной зеленый цвет */
+    color: var(--primary-green); /* Использование переменной для цвета текста */
 }
 
+/* Элементы списка задач */
 .task-list-item {
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-    color: #ffffff; /* Белый цвет текста */
+    transition: background-color 0.2s, transform 0.2s, color 0.2s; /* Плавные переходы */
+    color: var(--white-color); /* Использование переменной для цвета текста */
 }
 
+/* Эффект при наведении на элемент списка */
 .task-list-item:hover {
-    background-color: rgba(0, 255, 0, 0.2); /* Светло-зеленый цвет при наведении */
+    background-color: var(--hover-background); /* Использование переменной для фона */
     transform: scale(1.02); /* Эффект увеличения при наведении */
+    color: var(--primary-green); /* Изменение цвета текста при наведении */
 }

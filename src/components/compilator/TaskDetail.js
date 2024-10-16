@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTasks } from './TaskContext';
+import './TaskDetail.css'; // Убедитесь, что импортируете CSS
 
 const TaskDetail = () => {
     const { selectedTask } = useTasks();
     const navigate = useNavigate();
 
     if (!selectedTask) {
-        return <div>Выберите задачу из списка</div>;
+        return <div className="task-detail">Выберите задачу из списка</div>;
     }
 
     const topics = [
@@ -33,7 +34,11 @@ const TaskDetail = () => {
             <h3>Темы модуля:</h3>
             <ul>
                 {topics.map(topic => (
-                    <li key={topic.id} onClick={() => handleTopicClick(topic.id)} style={{ cursor: 'pointer', color: 'blue' }}>
+                    <li 
+                        key={topic.id} 
+                        onClick={() => handleTopicClick(topic.id)} 
+                        className="topic-item" // Используем класс вместо инлайнового стиля
+                    >
                         {topic.title}
                     </li>
                 ))}
