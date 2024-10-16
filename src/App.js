@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import { fetchItems } from './api';
 import { search } from './search';
-import SearchResults from './components/SearchResults'; // Добавьте этот импорт
+import SearchResults from './components/SearchResults';
 import * as Components from './components';
 import AboutPage from './components/PagesJS/AboutPage';
 import LiveCodingTrainersPage from './components/InternalContentBlocks/LiveCodingTrainersPage';
-
-
+import CompilerPage from './components/compilator/CompilerPage'; // Импортируем компилятор
+import { tasksData } from './components/compilator/tasks';
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -93,24 +93,23 @@ function App() {
                 </div>
 
                 <Suspense fallback={<div>Загрузка...</div>}>
-    <Routes>
-        <Route path="/" element={<Components.HomePage />} />
-        <Route path="/login" element={<Components.LoginPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/guides" element={<Components.GuidesPage />} />
-        <Route path="/trainers" element={<Components.TrainersPage />} />
-        <Route path="/tests" element={<Components.TestsPage />} />
-        <Route path="/courses" element={<Components.CoursesPage />} />
-        <Route path="/consultation" element={<Components.ConsultationPage />} />
-        <Route path="/events" element={<Components.EventsPage />} />
-        <Route path="/forum" element={<Components.ForumPage />} />
-        <Route path="/reviews" element={<Components.ReviewsPage />} />
-        <Route path="*" element={<div>Ничего не найдено</div>} />
-        <Route path="/livecoding" element={<LiveCodingTrainersPage />} />
-
-    </Routes>
-</Suspense>
-
+                    <Routes>
+                        <Route path="/" element={<Components.HomePage />} />
+                        <Route path="/login" element={<Components.LoginPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/guides" element={<Components.GuidesPage />} />
+                        <Route path="/trainers" element={<Components.TrainersPage />} />
+                        <Route path="/tests" element={<Components.TestsPage />} />
+                        <Route path="/courses" element={<Components.CoursesPage />} />
+                        <Route path="/consultation" element={<Components.ConsultationPage />} />
+                        <Route path="/events" element={<Components.EventsPage />} />
+                        <Route path="/forum" element={<Components.ForumPage />} />
+                        <Route path="/reviews" element={<Components.ReviewsPage />} />
+                        <Route path="*" element={<div>Ничего не найдено</div>} />
+                        <Route path="/livecoding" element={<LiveCodingTrainersPage />} />
+                        <Route path="/compiler" element={<CompilerPage />} /> {/* Новый маршрут для компилятора */}
+                    </Routes>
+                </Suspense>
             </div>
         </Router>
     );
