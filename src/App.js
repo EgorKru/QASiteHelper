@@ -1,18 +1,9 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import { fetchItems } from './api';
 import { search as searchDocuments } from './search';
-
-const HomePage = lazy(() => import('./components/HomePage'));
-const LoginPage = lazy(() => import('./components/LoginPage'));
-const AboutPage = lazy(() => import('./components/AboutPage'));
-const ConsultationPage = lazy(() => import('./components/ConsultationPage'));
-const ContactPage = lazy(() => import('./components/ContactPage'));
-const EventsPage = lazy(() => import('./components/EventsPage'));
-const FAQPage = lazy(() => import('./components/FAQPage'));
-const ForumPage = lazy(() => import('./components/ForumPage'));
-const ReviewsPage = lazy(() => import('./components/ReviewsPage'));
+import * as Components from './components';
 
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -60,46 +51,48 @@ function App() {
     const debouncedQuery = useDebounce(searchQuery, 300);
 
     useEffect(() => {
-        let isMounted = true;
+        const controller = new AbortController();
         const getData = async () => {
             setLoading(true);
             try {
-                const data = await fetchItems();
-                if (isMounted) setItems(data);
-                console.log("Fetched items:", data); // Проверка данных
+                const data = await fetchItems({ signal: controller.signal });
+                setItems(data);
+                console.log("Fetched items:", data);
             } catch (err) {
-                console.error('Ошибка при получении данных:', err);
-                if (isMounted) setError('Ошибка при получении данных');
+                if (err.name !== 'AbortError') {
+                    console.error('Ошибка при получении данных:', err);
+                    setError({ message: 'Ошибка при получении данных', details: err });
+                }
             } finally {
-                if (isMounted) setLoading(false);
+                setLoading(false);
             }
         };
         getData();
         return () => {
-            isMounted = false;
+            controller.abort();
         };
     }, []);
 
     const filteredPages = searchDocuments(debouncedQuery, items);
-    
-    const handleResultClick = () => {
-        setSearchQuery(''); // Очищаем строку поиска
-    };
 
-    const handleSearchChange = (event) => {
+    const handleResultClick = useCallback(() => {
+        setSearchQuery('');
+    }, []);
+
+    const handleSearchChange = useCallback((event) => {
         setSearchQuery(event.target.value);
-    };
+    }, []);
 
     const pages = [
-        { path: "/", name: "Главная", component: HomePage },
-        { path: "/login", name: "Вход", component: LoginPage },
-        { path: "/about", name: "О нас", component: AboutPage },
-        { path: "/consultation", name: "Консультации", component: ConsultationPage },
-        { path: "/contacts", name: "Контакты", component: ContactPage },
-        { path: "/events", name: "События", component: EventsPage },
-        { path: "/faq", name: "Часто задаваемые вопросы", component: FAQPage },
-        { path: "/forum", name: "Форум", component: ForumPage },
-        { path: "/reviews", name: "Отзывы", component: ReviewsPage },
+        { path: "/", name: "Главная", component: Components.HomePage },
+        { path: "/login", name: "Вход", component: Components.LoginPage },
+        { path: "/about", name: "О нас", component: Components.AboutPage },
+        { path: "/consultation", name: "Консультации", component: Components.ConsultationPage },
+        { path: "/contacts", name: "Контакты", component: Components.ContactPage },
+        { path: "/events", name: "События", component: Components.EventsPage },
+        { path: "/faq", name: "Часто задаваемые вопросы", component: Components.FAQPage },
+        { path: "/forum", name: "Форум", component: Components.ForumPage },
+        { path: "/reviews", name: "Отзывы", component: Components.ReviewsPage },
     ];
 
     return (
@@ -123,7 +116,7 @@ function App() {
                 </header>
 
                 <div className="search-results-container">
-                    {error && <div className="error-message">{error}</div>}
+                    {error && <div className="error-message">{error.message}</div>}
                     <SearchResults 
                         debouncedQuery={debouncedQuery} 
                         loading={loading} 
