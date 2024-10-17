@@ -1,54 +1,148 @@
+/* Импорт шрифтов */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Exo:100');
 
+/* Определение переменных CSS */
 :root {
-    --primary-color: #39ff14; /* Основной цвет */
+    --main-color: #39ff14; /* Основной цвет */
     --background-color: #000000; /* Цвет фона */
     --text-color: #ffffff; /* Цвет текста */
     --header-bg-color: #1a1a1a; /* Цвет фона заголовка */
     --highlight-bg-color: rgba(57, 255, 20, 0.2); /* Цвет выделения */
-    --neon-shadow: 0 0 10px var(--primary-color), 
-                   0 0 20px var(--primary-color), 
-                   0 0 30px var(--primary-color); /* Неоновая тень */
+    --neon-shadow: 0 0 10px var(--main-color), 
+                   0 0 20px var(--main-color), 
+                   0 0 30px var(--main-color); /* Неоновая тень */
     --font-main: 'Arial', sans-serif; /* Основной шрифт */
     --font-title: 'Press Start 2P', cursive; /* Шрифт заголовка */
 }
 
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Убедитесь, что размеры учитывают padding и border */
+}
+
+/* Убедитесь, что html и body занимают всю высоту */
+html, body {
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden; /* Скрываем прокрутку для body */
+}
+
+/* Контейнер страницы компилятора */
 .compiler-page {
-    display: flex; /* Включает флекс-выравнивание для компилятора */
-}
-
-.description {
-    width: 30%; /* Левый блок с описанием */
-    padding: 20px;
-    background-color: var(--header-bg-color);
-    border-radius: 5px;
-    margin-right: 20px;
-    box-shadow: var(--neon-shadow); /* Применение неоновой тени */
-}
-
-.modules-container {
-    width: 70%; /* Правый блок для модулей */
-    padding: 20px;
-    background-color: var(--header-bg-color);
-    border-radius: 5px;
-    box-shadow: var(--neon-shadow); /* Применение неоновой тени */
-}
-
-.modules-list {
     display: flex;
-    flex-direction: column; /* Вертикальная ориентация списка модулей */
+    flex-direction: column;
+    padding: 20px;
+    height: 100vh; /* Высота равная высоте экрана */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
 }
 
+/* Эффект затухания */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Описание модуля */
+.description {
+    background-color: rgba(26, 26, 26, 0.8); /* Полупрозрачный фон */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--neon-shadow);
+}
+
+/* Заголовок модуля */
+.module-title {
+    font-family: var(--font-title);
+    color: var(--main-color);
+    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.7);
+    margin-bottom: 10px;
+}
+
+/* Элемент модуля */
 .module-item {
     padding: 10px;
-    margin: 5px 0; /* Отступы между элементами */
-    background-color: var(--highlight-bg-color); /* Цвет фона для элемента */
-    border-radius: 5px; /* Скругленные углы */
-    cursor: pointer; /* Курсор указывает на кликабельность */
-    transition: background-color 0.3s; /* Плавный переход цвета фона */
+    margin: 5px 0;
+    border: 1px solid var(--main-color);
+    background-color: rgba(57, 255, 20, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 8px; /* Добавлено скругление углов */
 }
 
+/* Эффект при наведении на элемент модуля */
 .module-item:hover {
-    background-color: rgba(57, 255, 20, 0.4); /* Цвет фона при наведении */
+    background-color: rgba(57, 255, 20, 0.4);
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); /* Эффект тени при наведении */
+}
+
+/* Иконки с неоновым эффектом */
+.neon-icon {
+    color: var(--main-color);
+    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
+}
+
+/* Описание темы */
+.topic-description {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+/* Иконка информации */
+.info-icon {
+    margin-right: 5px;
+    color: var(--main-color);
+    font-size: 0.9em; /* Уменьшенный размер для иконки */
+}
+
+/* Кнопка "Назад" */
+.back-button {
+    margin-top: 20px;
+    color: var(--text-color);
+    border-color: var(--main-color);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+    background-color: rgba(57, 255, 20, 0.2);
+    transform: scale(1.05);
+}
+
+/* Пиксельный текст */
+.pixel-text {
+    font-family: var(--font-title);
+    color: var(--text-color);
+    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Элементы списка */
+.modules-list {
+    list-style-type: none; /* Убираем стандартные маркеры списка */
+    padding: 0;
+}
+
+.module-block {
+    margin-bottom: 30px; /* Расстояние между модулями */
+}
+
+/* Скрытие полосы прокрутки */
+.compiler-page::-webkit-scrollbar {
+    width: 0; /* Скрываем полосу прокрутки */
+}
+
+.compiler-page {
+    -ms-overflow-style: none; /* Internet Explorer и Edge */
+    scrollbar-width: none; /* Firefox */
 }

@@ -1,20 +1,21 @@
-/* src/TaskList.css */
-
 /* Определение переменных CSS */
 :root {
     --primary-green: #00ff00; /* Основной зеленый цвет */
     --background-dark: #121212; /* Темный фон */
+    --background-light: #ffffff; /* Светлый фон */
+    --text-dark: #000000; /* Тёмный текст */
     --white-color: #ffffff; /* Белый цвет текста */
     --hover-background: rgba(0, 255, 0, 0.2); /* Светло-зеленый цвет при наведении */
+    --completed-task-background: rgba(0, 255, 0, 0.1); /* Фон для выполненных задач */
 }
 
 /* Контейнер списка задач */
 .task-list-container {
     margin: 20px;
     padding: 10px;
-    border: 1px solid var(--primary-green); /* Использование переменной для рамки */
-    border-radius: 8px; /* Скругленные углы */
-    background-color: var(--background-dark); /* Использование переменной для фона */
+    border: 1px solid var(--primary-green);
+    border-radius: 8px;
+    background-color: var(--background-dark);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -22,20 +23,55 @@
 .task-list-title {
     font-size: 24px;
     margin-bottom: 10px;
-    color: var(--primary-green); /* Использование переменной для цвета текста */
+    color: var(--primary-green);
 }
 
 /* Элементы списка задач */
 .task-list-item {
     padding: 10px;
+    margin-bottom: 10px; /* Отступ между задачами */
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s, color 0.2s; /* Плавные переходы */
-    color: var(--white-color); /* Использование переменной для цвета текста */
+    transition: background-color 0.2s, transform 0.2s, color 0.2s;
+    color: var(--white-color);
+    border-radius: 5px;
 }
 
 /* Эффект при наведении на элемент списка */
 .task-list-item:hover {
-    background-color: var(--hover-background); /* Использование переменной для фона */
-    transform: scale(1.02); /* Эффект увеличения при наведении */
-    color: var(--primary-green); /* Изменение цвета текста при наведении */
+    background-color: var(--hover-background);
+    transform: scale(1.02);
+    color: var(--primary-green);
+}
+
+/* Стили для выполненных задач */
+.task-completed {
+    background-color: var(--completed-task-background); /* Бледно-зеленый фон */
+    text-decoration: line-through; /* Зачёркнутый текст */
+}
+
+/* Стили для среднего уровня сложности */
+.task-medium {
+    border-left: 4px solid var(--primary-green); /* Левый бордер для акцента */
+}
+
+/* Фокусное состояние для клавиатурной навигации */
+.task-list-item:focus {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 2px;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+    .task-list-container {
+        padding: 5px;
+    }
+
+    .task-list-item {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .task-list-title {
+        font-size: 20px;
+    }
 }

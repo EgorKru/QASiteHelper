@@ -8,12 +8,15 @@ import {
     Container,
     Box,
     CssBaseline,
+    CircularProgress,
+    Alert
 } from '@mui/material';
 import './CodeEditor.css';
 
 const CodeEditor = ({ taskId }) => {
     const [code, setCode] = useState('// Напишите ваш код здесь');
     const [output, setOutput] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     // Загружаем сохраненный код из localStorage при монтировании компонента
@@ -33,6 +36,8 @@ const CodeEditor = ({ taskId }) => {
     // Обработчик запуска кода
     const handleRunCode = async () => {
         setLoading(true);
+        setOutput(''); // Очистка вывода перед выполнением
+        setError('');  // Очистка ошибок перед выполнением
 
         const classPattern = /class\s+\w+/;
         let finalCode = code;
@@ -57,16 +62,16 @@ public class Main {
             });
 
             const result = await response.json();
-            setLoading(false); // Завершаем загрузку
+            setLoading(false);
 
             if (result.error) {
-                setOutput(`Ошибка: ${result.error}`);
+                setError(`Ошибка: ${result.error}`);
             } else {
                 setOutput(result.output);
             }
         } catch (error) {
             setLoading(false);
-            setOutput(`Ошибка: ${error.message}`);
+            setError(`Ошибка: ${error.message}`);
         }
     };
 
@@ -74,6 +79,7 @@ public class Main {
     const handleClearCode = () => {
         setCode('// Напишите ваш код здесь');
         setOutput('');
+        setError('');
         localStorage.removeItem(`savedCode_${taskId}`);
     };
 
@@ -89,14 +95,14 @@ public class Main {
                         variant="contained"
                         onClick={handleRunCode}
                         disabled={loading}
-                        className="green-button" // Использование зеленой кнопки
+                        className="green-button"
                     >
-                        {loading ? 'Выполнение...' : 'Запустить код'}
+                        {loading ? <CircularProgress size={24} /> : 'Запустить код'}
                     </Button>
                     <Button
                         variant="outlined"
                         onClick={handleClearCode}
-                        className="green-button" // Использование зеленой кнопки
+                        className="green-button"
                         sx={{ ml: 2 }}
                     >
                         Очистить код
@@ -112,13 +118,18 @@ public class Main {
                     options={{
                         selectOnLineNumbers: true,
                         automaticLayout: true,
-                        fontSize: 14, // Настройте размер шрифта
-                        theme: 'vs-dark', // Тема редактора
+                        fontSize: 14, 
+                        theme: 'vs-dark',
                     }}
                 />
             </Box>
+            {error && (
+                <Alert severity="error" sx={{ mt: 2 }}>
+                    {error}
+                </Alert>
+            )}
             {output && (
-                <pre>
+                <pre style={{ backgroundColor: '#1e1e1e', color: '#00ff00', padding: '10px', borderRadius: '5px', marginTop: '10px' }}>
                     Результат: {output}
                 </pre>
             )}
