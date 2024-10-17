@@ -58,9 +58,8 @@ html, body {
 /* Заголовок модуля */
 .module-title {
     font-family: var(--font-title);
-    color: var(--main-color);
+    color: var(--text-color); /* Установим белый цвет для заголовков модулей */
     text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.7);
-    margin-bottom: 10px;
 }
 
 /* Элемент модуля */
@@ -82,16 +81,32 @@ html, body {
 
 /* Иконки с неоновым эффектом */
 .neon-icon {
-    color: var(--main-color);
-    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
+    color: var(--main-color); /* Установим основной неоновый цвет */
+    text-shadow: 0 0 5px var(--main-color), 
+                 0 0 10px rgba(57, 255, 20, 0.7),
+                 0 0 20px rgba(57, 255, 20, 0.6),
+                 0 0 30px rgba(57, 255, 20, 0.5); /* Неоновая тень */
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(1); /* Исходное состояние */
+    }
+    50% {
+        transform: scale(1.1); /* Увеличиваем иконки в 1.1 раза */
+    }
+    100% {
+        transform: scale(1); /* Возвращаемся к исходному состоянию */
+    }
+}
 /* Описание темы */
 .topic-description {
     display: flex;
     align-items: center;
     margin-top: 5px;
+    color: var(--text-color); /* Изменено на белый цвет */
 }
+
 
 /* Иконка информации */
 .info-icon {
@@ -114,9 +129,8 @@ html, body {
 }
 
 /* Пиксельный текст */
-.pixel-text {
-    font-family: var(--font-title);
-    color: var(--text-color);
+.pixel-text, .pixel-description {
+    color: var(--text-color); /* Установим белый цвет для текстов */
     text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
 }
 
@@ -145,4 +159,8 @@ html, body {
 .compiler-page {
     -ms-overflow-style: none; /* Internet Explorer и Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+.modules-list .neon-icon {
+    animation: pulse 1.5s infinite; /* Добавим анимацию */
 }

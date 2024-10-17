@@ -93,13 +93,12 @@ const CompilerPage = () => {
                                     className="module-item fade-in-item" 
                                     aria-label={`Перейти к теме ${topic.name}`}
                                 >
-                                    <ListItemIcon>
+                                    <ListItemIcon style={{ color: 'var(--main-color)', animation: 'pulse 1.5s infinite' }}>
                                         {topic.icon}
                                     </ListItemIcon>
                                     <ListItemText 
-                                        primary={topic.name} 
-                                        secondary={topic.description} 
-                                        className="neon-text" 
+                                        primary={<span className="neon-icon">{topic.name}</span>}
+                                        secondary={<span className="topic-description">{topic.description}</span>}
                                         primaryTypographyProps={{ fontWeight: 'bold' }}
                                         secondaryTypographyProps={{ style: { fontStyle: 'italic' }}}
                                     />
