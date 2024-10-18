@@ -8,8 +8,8 @@
     --text-color: #ffffff; /* Цвет текста (изменено на белый) */
     --header-bg-color: #1a1a1a; /* Цвет фона заголовка */
     --highlight-bg-color: rgba(57, 255, 20, 0.2); /* Цвет выделения */
-    --neon-shadow: 0 0 10px var(--main-color), 
-                   0 0 20px var(--main-color), 
+    --neon-shadow: 0 0 10px var(--main-color),
+                   0 0 20px var(--main-color),
                    0 0 30px var(--main-color); /* Неоновая тень */
     --font-main: 'Arial', sans-serif; /* Основной шрифт */
     --font-title: 'Press Start 2P', cursive; /* Шрифт заголовка */
@@ -25,131 +25,77 @@
 /* Общие стили для html и body */
 html, body {
     height: 100%;
-    background-color: var(--background-color);
-    color: var(--text-color);
     font-family: var(--font-main);
-    overflow: hidden; /* Скрываем прокрутку для body */
+    background-color: var(--background-color); /* Цвет фона страницы */
+    color: var(--text-color);
+    overflow-y: auto; /* Включение вертикального скроллинга */
 }
 
-/* Контейнер страницы компилятора */
-.compiler-page {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    height: 100vh; /* Высота равная высоте экрана */
-    overflow-y: auto; /* Включаем вертикальную прокрутку */
+/* Стили для neon-text */
+.neon-text {
+    color: var(--main-color);
+    text-shadow: var(--neon-shadow);
 }
 
-/* Эффект затухания */
+/* Стили для fade-in */
 .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Описание модуля */
-.description {
-    background-color: rgba(26, 26, 26, 0.8); /* Полупрозрачный фон */
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--neon-shadow);
-}
-
-/* Заголовок модуля */
-.module-title {
-    font-family: var(--font-title);
-    color: var(--text-color); /* Цвет заголовка изменен на белый */
-    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.7);
-    margin-bottom: 10px;
-}
-
-/* Элементы модуля */
-.module-item {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid var(--main-color);
-    background-color: rgba(57, 255, 20, 0.1);
-    transition: background-color 0.3s, transform 0.2s;
-    border-radius: 8px; /* Скругление углов */
-}
-
-/* Эффект при наведении на элемент модуля */
-.module-item:hover {
-    background-color: rgba(57, 255, 20, 0.4);
-    transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); /* Эффект тени при наведении */
-}
-
-/* Иконки с неоновым эффектом */
-.neon-icon {
-    color: var(--text-color); /* Цвет иконок изменен на белый */
-    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
-}
-
-/* Описание темы */
-.topic-description {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-/* Иконка информации */
-.info-icon {
-    margin-right: 5px;
-    color: var(--text-color); /* Цвет иконки изменен на белый */
-    font-size: 0.9em; /* Уменьшенный размер для иконки */
-}
-
-/* Кнопка "Назад" */
-.back-button {
-    margin-top: 20px;
-    color: var(--text-color);
-    border-color: var(--main-color);
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.back-button:hover {
-    background-color: rgba(57, 255, 20, 0.2);
-    transform: scale(1.05);
-}
-
-/* Пиксельный текст */
-.pixel-text {
-    font-family: var(--font-title);
-    color: var(--text-color);
-    text-shadow: 0 0 5px var(--main-color), 0 0 10px rgba(57, 255, 20, 0.6);
-}
-
-/* Новый стиль для текста "Создайте и запустите свой первый проект." */
-.project-text {
-    color: var(--text-color); /* Цвет текста изменен на белый */
-    font-style: italic; /* Курсив */
-}
-
-/* Анимация */
+/* Анимация fadeIn */
 @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
     to {
         opacity: 1;
     }
 }
 
-/* Элементы списка */
-.modules-list {
-    list-style-type: none; /* Убираем стандартные маркеры списка */
-    padding: 0;
+/* Стили для pixel-text */
+.pixel-text {
+    font-family: var(--font-title);
+    font-size: 2rem;
 }
 
-/* Блоки модулей */
+/* Стили для pixel-description */
+.pixel-description {
+    font-size: 1.2rem;
+}
+
+/* Стили для кнопок */
+.back-button {
+    margin-top: 20px;
+    background-color: rgba(57, 255, 20, 0.3);
+    color: var(--text-color);
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(57, 255, 20, 0.5);
+    }
+}
+
+/* Стили для модуля */
 .module-block {
-    margin-bottom: 30px; /* Расстояние между модулями */
+    background-color: #222; /* Фон модуля */
+    border-radius: 12px; /* Округление углов */
+    padding: 15px; /* Внутренний отступ */
 }
 
-/* Скрытие полосы прокрутки */
-.compiler-page::-webkit-scrollbar {
-    width: 0; /* Скрываем полосу прокрутки */
+/* Стили для элементов списка */
+.module-item {
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 }
 
-.compiler-page {
-    -ms-overflow-style: none; /* Internet Explorer и Edge */
-    scrollbar-width: none; /* Firefox */
+/* Стили для иконок */
+.modules-list {
+    padding: 0;
 }

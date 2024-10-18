@@ -10,15 +10,15 @@ import {
     ListItemIcon,
     Button,
 } from '@mui/material';
-import { Subject, Build, Code } from '@mui/icons-material'; // Импорт иконок
-import PropTypes from 'prop-types'; // Для типизации
+import { Subject, Build, Code } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 import './CompilerPage.css';
 
 // Объект для хранения иконок
 const ICONS = {
-    subject: <Subject sx={{ color: '#ffffff' }} />, // Устанавливаем белый цвет
-    build: <Build sx={{ color: '#ffffff' }} />,     // Устанавливаем белый цвет
-    code: <Code sx={{ color: '#ffffff' }} />,       // Устанавливаем белый цвет
+    subject: <Subject fontSize="large" />,
+    build: <Build fontSize="large" />,
+    code: <Code fontSize="large" />,
 };
 
 // Модули и темы
@@ -68,17 +68,29 @@ const TopicItem = React.memo(({ topic, onClick }) => (
         aria-label={`Перейти к теме ${topic.name}`}
         role="button"
         tabIndex={0}
-        sx={{ transition: 'background-color 0.3s', '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' } }} // Используем sx для стилизации
+        sx={{
+            padding: '20px',
+            fontSize: '1.2rem',
+            transition: 'all 0.3s',
+            '&:hover': {
+                transform: 'scale(1.05)',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                zIndex: 1,
+                boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            },
+            marginBottom: '10px',
+            borderRadius: '8px',
+        }}
     >
-        <ListItemIcon>
+        <ListItemIcon sx={{ minWidth: '40px' }}>
             {topic.icon}
         </ListItemIcon>
         <ListItemText
             primary={topic.name}
             secondary={topic.description}
             className="neon-text"
-            primaryTypographyProps={{ fontWeight: 'bold' }}
-            secondaryTypographyProps={{ style: { fontStyle: 'italic', color: '#ffffff' } }} // Задаём белый цвет для описания
+            primaryTypographyProps={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+            secondaryTypographyProps={{ style: { fontStyle: 'italic', color: '#ffffff', fontSize: '1rem' } }}
         />
     </ListItem>
 ));
@@ -100,10 +112,9 @@ const CompilerPage = () => {
         setFade(true);
     }, []);
 
-    // Обработка навигации
-    const formatModuleName = useCallback((topicName) => {
-        return topicName.replace(/\s+/g, '-').toLowerCase();
-    }, []);
+    const formatModuleName = useCallback((topicName) =>
+        topicName.replace(/\s+/g, '-').toLowerCase(), []
+    );
 
     const handleModuleClick = useCallback((topicName) => {
         const formattedModuleName = formatModuleName(topicName);
@@ -112,11 +123,25 @@ const CompilerPage = () => {
 
     const renderedModules = useMemo(() => (
         MODULES.map((module, index) => (
-            <Box key={index} mb={3} className="module-block">
-                <Typography variant="h5" className="module-title neon-text">
+            <Box
+                key={index}
+                mb={4}
+                className="module-block"
+                sx={{
+                    padding: '15px',
+                    borderRadius: '12px',
+                    backgroundColor: '#222',
+                    transition: 'all 0.3s',
+                    '&:hover': {
+                        transform: 'translateY(-5px)',
+                        boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
+                    },
+                }}
+            >
+                <Typography variant="h5" className="module-title neon-text" mb={2}>
                     {module.title}
                 </Typography>
-                <List className="modules-list">
+                <List className="modules-list" sx={{ padding: 0 }}>
                     {module.topics.map((topic, topicIndex) => (
                         <TopicItem
                             key={topicIndex}
@@ -130,29 +155,31 @@ const CompilerPage = () => {
     ), [handleModuleClick]);
 
     return (
-        <Container maxWidth="lg" className={`compiler-page ${fade ? 'fade-in' : ''}`}>
-            <Box className="description" mb={3}>
-                <Typography variant="h4" gutterBottom className="neon-text pixel-text">
-                    Описание модуля
-                </Typography>
-                <Typography variant="body1" paragraph className="neon-text pixel-description">
-                    В этом модуле вы изучите основы Java, включая синтаксис, переменные, операторы и основы объектно-ориентированного программирования. Каждый раздел содержит интерактивные задания для закрепления знаний.
-                </Typography>
-            </Box>
-            <Box className="modules-container">
-                <Typography variant="h4" gutterBottom className="neon-text pixel-text">
-                    Темы
-                </Typography>
-                {renderedModules}
-            </Box>
-            <Button
-                variant="outlined"
-                onClick={() => navigate(-1)} // Навигация назад
-                className="back-button neon-text"
-            >
-                Назад
-            </Button>
-        </Container>
+        <div className={`compiler-page ${fade ? 'fade-in' : ''}`} style={{ height: '100vh', overflowY: 'auto' }}>
+            <Container maxWidth="lg" sx={{ height: '100%' }}>
+                <Box className="description" mb={3}>
+                    <Typography variant="h4" gutterBottom className="neon-text pixel-text">
+                        Описание модуля
+                    </Typography>
+                    <Typography variant="body1" paragraph className="neon-text pixel-description">
+                        В этом модуле вы изучите основы Java, включая синтаксис, переменные, операторы и основы объектно-ориентированного программирования. Каждый раздел содержит интерактивные задания для закрепления знаний.
+                    </Typography>
+                </Box>
+                <Box className="modules-container" sx={{ padding: 0 }}>
+                    <Typography variant="h4" gutterBottom className="neon-text pixel-text">
+                        Темы
+                    </Typography>
+                    {renderedModules}
+                </Box>
+                <Button
+                    variant="outlined"
+                    onClick={() => navigate(-1)}
+                    className="back-button neon-text"
+                >
+                    Назад
+                </Button>
+            </Container>
+        </div>
     );
 };
 
