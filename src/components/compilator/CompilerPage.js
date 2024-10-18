@@ -88,7 +88,6 @@ const TopicItem = React.memo(({ topic, onClick }) => (
         <ListItemText
             primary={topic.name}
             secondary={topic.description}
-            className="neon-text"
             primaryTypographyProps={{ fontWeight: 'bold', fontSize: '1.1rem' }}
             secondaryTypographyProps={{ style: { fontStyle: 'italic', color: '#ffffff', fontSize: '0.9rem' } }}
         />
@@ -140,7 +139,7 @@ const CompilerPage = () => {
                     },
                 }}
             >
-                <Typography variant="h5" className="module-title neon-text" mb={2}>
+                <Typography variant="h5" mb={2}>
                     {module.title}
                 </Typography>
                 <List className="modules-list" sx={{ padding: 0 }}>
@@ -168,7 +167,6 @@ const CompilerPage = () => {
                     <Typography 
                         variant="h4" 
                         gutterBottom 
-                        className="neon-text pixel-text" 
                         onClick={handleToggle} // Добавляем обработчик клика
                         sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }} // Указатель для курсора
                     >
@@ -176,7 +174,7 @@ const CompilerPage = () => {
                         {open ? <ExpandLess /> : <ExpandMore />} {/* Иконка для раскрытия */}
                     </Typography>
                     <Collapse in={open}>
-                        <Typography variant="body1" paragraph className="neon-text pixel-description">
+                        <Typography variant="body1" paragraph className="pixel-description">
                             Добро пожаловать в мир Java!
                             В этом модуле вы погрузитесь в основы языка программирования Java, который является одним из самых популярных и востребованных языков в мире разработки.
                             <br /><br />
@@ -191,7 +189,7 @@ const CompilerPage = () => {
                     </Collapse>
                 </Box>
                 <Box className="modules-container" sx={{ padding: 0 }}>
-                    <Typography variant="h4" gutterBottom className="neon-text pixel-text">
+                    <Typography variant="h4" gutterBottom>
                         Темы
                     </Typography>
                     {renderedModules}
