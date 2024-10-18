@@ -58,21 +58,11 @@ html, body {
     font-size: 2rem;
 }
 
-/* Стили для pixel-description */
+/* Стили для pixel-description без свечения */
 .pixel-description {
     font-size: 1.2rem;
-}
-
-/* Стили для кнопок */
-.back-button {
-    margin-top: 20px;
-    background-color: rgba(57, 255, 20, 0.3);
-    color: var(--text-color);
-    transition: background-color 0.3s;
-
-    &:hover {
-        background-color: rgba(57, 255, 20, 0.5);
-    }
+    color: var(--text-color); /* Установка цвета текста */
+    font-weight: normal; /* Убираем выделение */
 }
 
 /* Стили для модуля */
@@ -80,19 +70,23 @@ html, body {
     background-color: #222; /* Фон модуля */
     border-radius: 12px; /* Округление углов */
     padding: 15px; /* Внутренний отступ */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень для блока */
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавные переходы */
+}
+
+.module-block:hover {
+    transform: scale(1.02); /* Увеличение при наведении */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Увеличенная тень при наведении */
 }
 
 /* Стили для элементов списка */
 .module-item {
-    cursor: pointer;
-    transition: all 0.3s;
+    background-color: #3c3f41; /* Цвет фона элементов списка */
+    transition: background-color 0.3s;
+}
 
-    &:hover {
-        transform: scale(1.05);
-        background-color: rgba(255, 255, 255, 0.1);
-        z-index: 1;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+.module-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Цвет фона при наведении */
 }
 
 /* Стили для иконок */

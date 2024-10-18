@@ -8,9 +8,9 @@ import {
     Box,
     Container,
     ListItemIcon,
-    Button,
+    Collapse,
 } from '@mui/material';
-import { Subject, Build, Code } from '@mui/icons-material';
+import { Subject, Build, Code, ExpandMore, ExpandLess } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import './CompilerPage.css';
 
@@ -69,17 +69,17 @@ const TopicItem = React.memo(({ topic, onClick }) => (
         role="button"
         tabIndex={0}
         sx={{
-            padding: '20px',
-            fontSize: '1.2rem',
-            transition: 'all 0.3s',
+            padding: '15px',
+            borderRadius: '8px',
+            transition: 'background-color 0.3s, transform 0.3s',
             '&:hover': {
-                transform: 'scale(1.05)',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                zIndex: 1,
-                boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                backgroundColor: '#3f51b5', // Цвет при наведении
+                color: '#fff', // Цвет текста при наведении
+                transform: 'scale(1.02)',
             },
             marginBottom: '10px',
-            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
         }}
     >
         <ListItemIcon sx={{ minWidth: '40px' }}>
@@ -89,8 +89,8 @@ const TopicItem = React.memo(({ topic, onClick }) => (
             primary={topic.name}
             secondary={topic.description}
             className="neon-text"
-            primaryTypographyProps={{ fontWeight: 'bold', fontSize: '1.2rem' }}
-            secondaryTypographyProps={{ style: { fontStyle: 'italic', color: '#ffffff', fontSize: '1rem' } }}
+            primaryTypographyProps={{ fontWeight: 'bold', fontSize: '1.1rem' }}
+            secondaryTypographyProps={{ style: { fontStyle: 'italic', color: '#ffffff', fontSize: '0.9rem' } }}
         />
     </ListItem>
 ));
@@ -107,6 +107,7 @@ TopicItem.propTypes = {
 const CompilerPage = () => {
     const navigate = useNavigate();
     const [fade, setFade] = useState(false);
+    const [open, setOpen] = useState(false); // Состояние для управления раскрытием
 
     useEffect(() => {
         setFade(true);
@@ -128,13 +129,14 @@ const CompilerPage = () => {
                 mb={4}
                 className="module-block"
                 sx={{
-                    padding: '15px',
+                    padding: '20px',
                     borderRadius: '12px',
                     backgroundColor: '#222',
                     transition: 'all 0.3s',
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)', // Тень для блока
                     '&:hover': {
-                        transform: 'translateY(-5px)',
-                        boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
+                        transform: 'scale(1.02)',
+                        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)', // Увеличенная тень при наведении
                     },
                 }}
             >
@@ -154,16 +156,39 @@ const CompilerPage = () => {
         ))
     ), [handleModuleClick]);
 
+    // Функция для управления раскрытием описания
+    const handleToggle = () => {
+        setOpen((prev) => !prev);
+    };
+
     return (
         <div className={`compiler-page ${fade ? 'fade-in' : ''}`} style={{ height: '100vh', overflowY: 'auto' }}>
             <Container maxWidth="lg" sx={{ height: '100%' }}>
                 <Box className="description" mb={3}>
-                    <Typography variant="h4" gutterBottom className="neon-text pixel-text">
-                        Описание модуля
+                    <Typography 
+                        variant="h4" 
+                        gutterBottom 
+                        className="neon-text pixel-text" 
+                        onClick={handleToggle} // Добавляем обработчик клика
+                        sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }} // Указатель для курсора
+                    >
+                        Описание модуля 
+                        {open ? <ExpandLess /> : <ExpandMore />} {/* Иконка для раскрытия */}
                     </Typography>
-                    <Typography variant="body1" paragraph className="neon-text pixel-description">
-                        В этом модуле вы изучите основы Java, включая синтаксис, переменные, операторы и основы объектно-ориентированного программирования. Каждый раздел содержит интерактивные задания для закрепления знаний.
-                    </Typography>
+                    <Collapse in={open}>
+                        <Typography variant="body1" paragraph className="neon-text pixel-description">
+                            Добро пожаловать в мир Java!
+                            В этом модуле вы погрузитесь в основы языка программирования Java, который является одним из самых популярных и востребованных языков в мире разработки.
+                            <br /><br />
+                            Мы начнем с изучения основ синтаксиса, где вы познакомитесь с переменными, операторами и ключевыми концепциями программирования. Вы узнаете, как правильно использовать различные типы данных и управлять ими.
+                            <br /><br />
+                            Далее мы откроем дверь в объектно-ориентированное программирование (ООП), где вы научитесь создавать классы и объекты, используя наследование и полиморфизм для более эффективного кода.
+                            <br /><br />
+                            Каждый раздел включает увлекательные интерактивные задания, которые помогут вам закрепить знания на практике. Приготовьтесь к множеству интересных вызовов и задач, которые сделают ваше обучение увлекательным и продуктивным!
+                            <br /><br />
+                            Вперёд, к новым знаниям и навыкам в Java! 
+                        </Typography>
+                    </Collapse>
                 </Box>
                 <Box className="modules-container" sx={{ padding: 0 }}>
                     <Typography variant="h4" gutterBottom className="neon-text pixel-text">
@@ -171,13 +196,6 @@ const CompilerPage = () => {
                     </Typography>
                     {renderedModules}
                 </Box>
-                <Button
-                    variant="outlined"
-                    onClick={() => navigate(-1)}
-                    className="back-button neon-text"
-                >
-                    Назад
-                </Button>
             </Container>
         </div>
     );
