@@ -6,7 +6,7 @@ const trainersData = [
         id: 'lc-trainer-1',
         title: 'Основы Java',
         description: 'Изучите основы Java с помощью интерактивных задач.',
-        link: '/compiler', // Измените ссылку на компилятор
+        link: '/compiler', // Изменить ссылку на компилятор
     }
 ];
 

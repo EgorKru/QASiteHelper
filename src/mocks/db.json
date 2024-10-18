@@ -14,7 +14,7 @@
       "title": "Тренажеры",
       "description": "Потренироваться в различных областях.",
       "icon": "fas fa-dumbbell",
-      "link": "/trainers",
+      "link": "/livecoding",
       "rating": 4.7
     },
     {
