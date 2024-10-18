@@ -161,7 +161,7 @@ const CompilerPage = () => {
     };
 
     return (
-        <div className={`compiler-page ${fade ? 'fade-in' : ''}`} style={{ height: '100vh', overflowY: 'auto' }}>
+        <div className={`compiler-page ${fade ? 'fade-in' : ''}`}>
             <Container maxWidth="lg" sx={{ height: '100%' }}>
                 <Box className="description" mb={3}>
                     <Typography 
@@ -188,7 +188,7 @@ const CompilerPage = () => {
                         </Typography>
                     </Collapse>
                 </Box>
-                <Box className="modules-container" sx={{ padding: 0 }}>
+                <Box className="modules-container">
                     <Typography variant="h4" gutterBottom>
                         Темы
                     </Typography>

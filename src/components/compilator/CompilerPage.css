@@ -93,3 +93,7 @@ html, body {
 .modules-list {
     padding: 0;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+  }
