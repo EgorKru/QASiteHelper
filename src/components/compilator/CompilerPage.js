@@ -106,7 +106,7 @@ TopicItem.propTypes = {
 const CompilerPage = () => {
     const navigate = useNavigate();
     const [fade, setFade] = useState(false);
-    const [open, setOpen] = useState(false); // Состояние для управления раскрытием
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setFade(true);
@@ -132,10 +132,10 @@ const CompilerPage = () => {
                     borderRadius: '12px',
                     backgroundColor: '#222',
                     transition: 'all 0.3s',
-                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)', // Тень для блока
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)',
                     '&:hover': {
                         transform: 'scale(1.02)',
-                        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)', // Увеличенная тень при наведении
+                        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)',
                     },
                 }}
             >
@@ -155,7 +155,6 @@ const CompilerPage = () => {
         ))
     ), [handleModuleClick]);
 
-    // Функция для управления раскрытием описания
     const handleToggle = () => {
         setOpen((prev) => !prev);
     };
@@ -167,11 +166,11 @@ const CompilerPage = () => {
                     <Typography 
                         variant="h4" 
                         gutterBottom 
-                        onClick={handleToggle} // Добавляем обработчик клика
-                        sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }} // Указатель для курсора
+                        onClick={handleToggle}
+                        sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                     >
                         Описание модуля 
-                        {open ? <ExpandLess /> : <ExpandMore />} {/* Иконка для раскрытия */}
+                        {open ? <ExpandLess /> : <ExpandMore />}
                     </Typography>
                     <Collapse in={open}>
                         <Typography variant="body1" paragraph className="pixel-description">
@@ -190,7 +189,7 @@ const CompilerPage = () => {
                 </Box>
                 <Box className="modules-container">
                     <Typography variant="h4" gutterBottom>
-                        Темы
+                        <span className="pixel-text neon-text">Темы модуля</span>
                     </Typography>
                     {renderedModules}
                 </Box>
