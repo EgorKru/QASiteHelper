@@ -1,235 +1,225 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Exo:100');
 
-/* Установим box-sizing для всех элементов */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+:root {
+    --primary-color: #39ff14;
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --header-bg-color: #1a1a1a;
+    --highlight-bg-color: rgba(57, 255, 20, 0.2);
+    --neon-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+    --font-main: 'Arial', sans-serif;
+    --font-title: 'Press Start 2P', cursive;
+    --transition-duration: 0.3s;
+    --border-radius: 5px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 html, body {
-  margin: 0; /* Убираем отступы */
-  padding: 0; /* Убираем внутренние отступы */
-  height: 100%; /* Устанавливаем высоту в 100% */
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-/* Основные стили */
 body {
-  font-family: 'Arial', sans-serif;
-  color: #ffffff;
-  background-color: #000000; /* Чёрный фон */
-  overflow-y: auto; /* Отключаем скроллинг для фона */
-  position: relative;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-y: auto;
+    position: relative;
+    background: linear-gradient(135deg, var(--background-color), var(--header-bg-color));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-/* Фоновая анимация */
-@keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
-}
-
-@keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
-}
-
-/* Настройка фона с изображением */
 body::before {
-  content: '';
-  position: absolute;
-  top: 70px; /* Позиция фона начинается под шапкой */
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 70px); /* Высота страницы без шапки */
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC') repeat 0 0;
-  opacity: 0.1; /* Прозрачность изображения */
-  z-index: -1; /* Помещаем фон за остальными элементами */
-  animation: bg-scrolling 0.92s infinite linear; /* Анимация движения фона */
+    content: '';
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), var(--highlight-bg-color));
+    opacity: 0.1;
+    z-index: -1;
 }
 
-/* Эффект бегущего текста */
-@keyframes moveText {
-  0% {
-    transform: translateY(100%); /* Начальная позиция за нижней границей */
-  }
-  100% {
-    transform: translateY(-100%); /* Конечная позиция за верхней границей */
-  }
-}
-
-.running-code {
-  position: absolute;
-  top: 0; /* Убедитесь, что элемент не пересекается с другими элементами */
-  left: 0;
-  width: 100%;
-  white-space: nowrap;
-  font-family: 'Courier New', monospace;
-  font-size: 24px;
-  color: #39ff14;
-  opacity: 0.8;
-  z-index: 5; /* Убедитесь, что он ниже основных элементов */
-  animation: moveText 10s linear infinite;
-}
-
-/* Размещение нескольких строк кода */
-.code-line {
-  position: absolute;
-  width: 100%;
-  opacity: 0.7;
-}
-
-.line1 { top: 10%; animation-delay: 0s; }
-.line2 { top: 30%; animation-delay: 2s; }
-.line3 { top: 50%; animation-delay: 4s; }
-.line4 { top: 70%; animation-delay: 6s; }
-.line5 { top: 90%; animation-delay: 8s; }
-
-/* Анимация неонового заголовка */
 @keyframes neonFlicker {
-  0%, 100% { text-shadow: 0 0 5px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14; }
-  50% { text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14; }
+    0%, 100% {
+        text-shadow: var(--neon-shadow);
+    }
+    50% {
+        text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color), 0 0 60px var(--primary-color);
+    }
 }
 
-/* Глитч эффект для заголовка */
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, -2px); }
-  40% { transform: translate(2px, 2px); }
-  60% { transform: translate(-2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
-}
-
-/* Анимация появления элементов */
-@keyframes pixelReveal {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Эффект свечения */
 .neon-effect {
-  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+    box-shadow: var(--neon-shadow);
 }
 
-/* Основная тема шапки */
 .App-header {
-  background-color: #1a1a1a; /* Темный фон */
-  padding: 15px;
-  text-align: center;
-  box-shadow: inset 0 0 0 4px #39ff14;
-  border-bottom: 4px solid #39ff14;
-  animation: pixelReveal 1s ease-in-out forwards;
-  position: relative; /* Убедимся, что шапка имеет позицию */
-  z-index: 10; /* Поднимаем шапку выше остальных элементов */
+    background-color: var(--header-bg-color);
+    padding: 15px;
+    text-align: center;
+    box-shadow: inset 0 0 0 4px var(--primary-color);
+    border-bottom: 4px solid var(--primary-color);
+    position: relative;
+    z-index: 10;
 }
 
-/* Заголовок */
 .header-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 24px;
-  color: #39ff14;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
-  display: inline-block;
-  margin-bottom: 10px;
-  text-decoration: none;
-  animation: neonFlicker 1.5s infinite alternate, glitch 0.2s infinite;
+    font-family: var(--font-title);
+    font-size: 24px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: var(--neon-shadow);
+    display: inline-block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    animation: neonFlicker 1.5s infinite alternate;
 }
 
-/* Навигационная панель */
 .nav-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  animation: pixelReveal 1s ease-in-out 0.5s forwards;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
-/* Поле поиска */
 .search-bar {
-  padding: 10px;
-  border: 2px solid #39ff14;
-  background-color: #121212;
-  color: #39ff14;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
-  width: 150px;
-  transition: background-color 0.3s ease;
-  animation: pixelReveal 1s ease-in-out 1s forwards;
+    padding: 10px;
+    border: 2px solid var(--primary-color);
+    background-color: #121212;
+    color: var(--primary-color);
+    font-family: var(--font-title);
+    font-size: 14px;
+    width: 150px;
+    transition: background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 }
 
 .search-bar:focus {
-  background-color: #1a1a1a;
-  outline: none;
+    background-color: var(--header-bg-color);
+    outline: none;
+    box-shadow: var(--neon-shadow);
 }
 
-/* Пиксельные кнопки */
 .auth-button {
-  padding: 10px;
-  background-color: #39ff14;
-  color: #1a1a1a;
-  font-family: 'Press Start 2P', cursive;
-  border: 2px solid #000;
-  text-transform: uppercase;
-  font-size: 12px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 0;
-  animation: pixelReveal 1s ease-in-out 1.5s forwards;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--header-bg-color);
+    font-family: var(--font-title);
+    border: 2px solid #000;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transition-duration) ease, transform 0.2s;
+    border-radius: 0;
 }
 
 .auth-button:hover {
-  background-color: #2ecc71;
-  color: #ffffff;
+    background-color: #2ecc71;
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
-/* Результаты поиска */
 .search-results {
-  width: 100%;
-  max-width: 600px; /* Ограничение ширины для результатов */
-  margin-top: 20px; /* Отступ сверху */
-  background-color: #1a1a1a; /* Фон для результатов */
-  padding: 10px;
-  border: none; /* Убираем рамку */
-  border-radius: 5px; /* Скруглённые углы */
-  z-index: 100; /* Убедитесь, что результаты выше всех других элементов */
-  position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    background-color: var(--header-bg-color);
+    padding: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    z-index: 100;
+    position: relative;
 }
 
 .search-results.hidden {
-  display: none; /* Полное скрытие блока результатов */
+    display: none;
 }
 
 .search-results ul {
-  list-style: none; /* Убираем маркеры списка */
-  padding: 0; /* Убираем отступы */
+    list-style: none;
+    padding: 0;
 }
 
 .search-results li {
-  margin: 10px 0; /* Отступы между элементами списка */
+    margin: 10px 0;
 }
 
 .search-results a {
-  color: #39ff14;
-  text-decoration: none; /* Убираем подчеркивание */
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .search-results a:hover {
-  text-decoration: underline; /* Подчеркивание при наведении */
+    text-decoration: underline;
 }
 
 .highlight {
-  background-color: rgba(0, 255, 119, 0.73);
-  color: #000000;
+    background-color: var(--highlight-bg-color);
+    color: #000000;
+}
+
+.loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+}
+
+.spinner {
+    border: 8px solid var(--primary-color);
+    border-top: 8px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.block {
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease;
+}
+
+.block:hover {
+    background-color: rgba(60, 60, 60, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }

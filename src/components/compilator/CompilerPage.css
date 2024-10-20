@@ -1,0 +1,113 @@
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Определение переменных CSS */
+:root {
+    --main-color: #39ff14; /* Основной цвет */
+    --background-color: #000000; /* Цвет фона */
+    --text-color: #ffffff; /* Цвет текста (изменено на белый) */
+    --header-bg-color: #1a1a1a; /* Цвет фона заголовка */
+    --highlight-bg-color: rgba(57, 255, 20, 0.2); /* Цвет выделения */
+    --neon-shadow: 0 0 10px var(--main-color),
+                   0 0 20px var(--main-color),
+                   0 0 30px var(--main-color); /* Неоновая тень */
+    --font-main: 'Arial', sans-serif; /* Основной шрифт */
+    --font-title: 'Press Start 2P', cursive; /* Шрифт заголовка */
+}
+
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Учет padding и border в размерах */
+}
+
+/* Общие стили для html и body */
+html, body {
+    height: 100%;
+    font-family: var(--font-main);
+    background-color: var(--background-color); /* Цвет фона страницы */
+    color: var(--text-color);
+    overflow-y: auto; /* Включение вертикального скроллинга */
+}
+
+/* Стили для neon-text */
+.neon-text {
+    color: var(#ff0000);
+    text-shadow: var(#ff0000);
+}
+
+/* Стили для fade-in */
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Анимация fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для pixel-text */
+.pixel-text {
+    font-family: var(--font-title);
+    font-size: 2rem;
+}
+
+/* Стили для pixel-description без свечения */
+.pixel-description {
+    font-size: 1.2rem;
+    color: var(--text-color); /* Установка цвета текста */
+    font-weight: normal; /* Убираем выделение */
+}
+
+/* Стили для модуля */
+.module-block {
+    background-color: #222; /* Фон модуля */
+    border-radius: 12px; /* Округление углов */
+    padding: 15px; /* Внутренний отступ */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень для блока */
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавные переходы */
+}
+
+.module-block:hover {
+    transform: scale(1.02); /* Увеличение при наведении */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Увеличенная тень при наведении */
+}
+
+/* Стили для элементов списка */
+.module-item {
+    background-color: #3c3f41; /* Цвет фона элементов списка */
+    transition: background-color 0.3s;
+}
+
+.module-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Цвет фона при наведении */
+}
+
+/* Стили для иконок */
+.modules-list {
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .neon-text {
+    color: var(--main-color);
+    text-shadow: 
+        0 0 5px var(#37ff1443),
+        0 0 10px var(#e99898a9),
+        0 0 20px var(#0ef397a9),
+        0 0 30px #00a2ff91,
+        0 0 40px #007bff53;
+}
+
+
+
+

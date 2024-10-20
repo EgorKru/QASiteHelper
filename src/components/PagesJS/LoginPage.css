@@ -1,0 +1,151 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00ff00;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+}
+
+.neon-background {
+    background: linear-gradient(45deg, rgba(57, 255, 20, 0.5), rgba(0, 255, 255, 0.5));
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+.input-container {
+    margin: 10px 0;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #39ff14;
+    background-color: #121212;
+    color: #39ff14;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.password-wrapper {
+    position: relative; /* Для позиционирования иконки */
+}
+
+.password-input {
+    padding-right: 40px; /* Добавляем пространство для иконки */
+}
+
+.input:focus {
+    outline: none;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+::placeholder {
+    color: #39ff14;
+    opacity: 0.7;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #39ff14;
+    color: #1a1a1a;
+    border: 2px solid #00ff00;
+    transition: transform 0.2s, background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2ecc71;
+}
+
+
+
+.toggle-password {
+    position: absolute;
+    right: 10px;               /* Расположение справа */
+    top: 50%;                  /* Вертикальное центрирование */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+    background: none;         /* Без фона */
+    border: none;             /* Без рамки */
+    color: #39ff14;           /* Цвет иконки */
+    cursor: pointer;          /* Указатель на кнопку */
+
+    /* Установка фиксированных размеров */
+    width: 24px;              /* Ширина кнопки */
+    height: 24px;             /* Высота кнопки */
+    
+    padding: 0;               /* Убираем внутренние отступы */
+    margin: 0;                /* Убираем внешние отступы */
+    
+    /* Убираем эффекты */
+    transition: none;         /* Убираем переходы */
+}
+
+.toggle-password:focus,
+.toggle-password:hover {
+    outline: none;            /* Убираем контур при фокусе */
+    background: none;        /* Убираем фон при наведении */
+    color: #39ff14;          /* Убедитесь, что цвет остается прежним */
+}
+
+/* Дополнительно: уберите возможные изменения в icon */
+.icon {
+    display: block;           /* Убедитесь, что иконка ведет себя как блочный элемент */
+    width: 100%;             /* Занимает всю ширину кнопки */
+    height: auto;            /* Высота авто, чтобы сохранить пропорции */
+}
+
+
+
+
+
+.status-message {
+    text-align: center;
+    color: #39ff14;
+    margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
+    animation: fadeIn 0.5s;
+}
+
+.progress-bar {
+    height: 5px;
+    background-color: #00ff00;
+    animation: loading 2s infinite;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 0; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

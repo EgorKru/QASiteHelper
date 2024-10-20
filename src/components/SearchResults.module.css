@@ -1,0 +1,58 @@
+.resultsContainer {
+    position: absolute;
+    background-color: #000000; /* Абсолютно черный фон */
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid #00ff00; /* Яркая рамка для пиксельного стиля */
+    font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт */
+}
+
+.resultsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resultItem {
+    margin: 0;
+    padding: 10px 15px;
+    transition: background-color 0.2s; /* Плавный переход фона */
+    border-bottom: 1px solid #00ff00; /* Нижняя граница для разделения элементов */
+}
+
+.resultItem:last-child {
+    border-bottom: none; /* Убираем нижнюю границу у последнего элемента */
+}
+
+.resultLink {
+    color: #00ff00; /* Яркий цвет для текста */
+    text-decoration: none; /* Убираем подчеркивание */
+    font-size: 1.1em;
+    display: block; /* Блочный элемент для удобства клика */
+    padding: 5px; /* Отступы для кликабельности */
+}
+
+.resultLink:hover {
+    text-shadow: none; /* Убираем тень при наведении */
+    background-color: transparent; /* Убираем изменение фона */
+    /* Убираем подчеркивание */
+}
+
+.loadingIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    color: #00ff00; /* Цвет текста загрузки */
+}
+
+.noResults {
+    text-align: center;
+    font-size: 1.2em;
+    color: #ff0000;
+    margin: 10px 0;
+}
