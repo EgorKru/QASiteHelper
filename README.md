@@ -1,6 +1,5 @@
 Команды для запуска серверов:
- json-server --watch db. json
-
+json-server --watch src/mocks/db.json --port 3001
  
 
 
