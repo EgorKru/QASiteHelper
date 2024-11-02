@@ -3,6 +3,7 @@
 
 npm start
 
+Компилятор node src/server.js 
 
 json-server --watch src/mocks/db.json --port 3001
  
