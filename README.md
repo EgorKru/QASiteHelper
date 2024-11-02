@@ -5,7 +5,8 @@ npm start
 
 Компилятор node src/server.js 
 
-json-server --watch src/mocks/db.json --port 3001
+Поисковик: json-server --watch src/mocks/db.json --port 3001 (если не запускается, то нужна донастройка системы - Get-ExecutionPolicy , если там Restricted , то пишем в повершелл в режиме админа Set-ExecutionPolicy RemoteSigned , потом заново в терминале запускаем json-server --watch src/mocks/db.json --port 3001
+
  
 
 
