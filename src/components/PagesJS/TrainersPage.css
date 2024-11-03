@@ -1,0 +1,24 @@
+/* src/components/TrainersPage.css */
+.trainers-page {
+    padding: 20px;
+}
+
+.trainers-list {
+    list-style: none;
+    padding: 0;
+}
+
+.trainer-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.trainer-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.trainer-link:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,84 @@
+{
+  "name": "qa-education",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/eslint-parser": "^7.25.9",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@monaco-editor/react": "^4.6.0",
+    "@mui/icons-material": "^6.1.4",
+    "@mui/material": "^6.1.4",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@xyflow/react": "^12.3.2",
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "eslint-webpack-plugin": "^4.2.0",
+    "express": "^4.21.1",
+    "formik": "^2.4.6",
+    "framer-motion": "^11.11.8",
+    "fuse.js": "^7.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "i18next": "^23.16.0",
+    "lodash-es": "^4.17.21",
+    "monaco-editor": "^0.52.0",
+    "natural": "^8.0.1",
+    "nth-check": "^2.1.1",
+    "openai": "^4.67.3",
+    "postcss": "^8.4.47",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.0.3",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.27.0",
+    "react-scripts": "^5.0.1",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.13",
+    "tough-cookie": "^5.0.0",
+    "web-vitals": "^2.1.4",
+    "webpack-dev-middleware": "^7.4.2",
+    "yargs-parser": "^21.1.1",
+    "yup": "^1.4.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^8.57.1",
+    "eslint-config-react-app": "^7.0.1"
+  }
+}
