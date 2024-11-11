@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchItems } from './api'; // Убедитесь, что путь правильный
+import { fetchItems } from '../api';
 
 const TestFetch = () => {
     const [items, setItems] = useState([]);
@@ -14,7 +14,8 @@ const TestFetch = () => {
                 console.log('Загруженные данные:', data); // Отладочный вывод
                 setItems(data); // Устанавливаем загруженные данные
             } catch (err) {
-                setError('Ошибка при загрузке данных');
+                console.error('Ошибка при загрузке данных:', err.message); // Более подробная ошибка
+                setError('Ошибка при загрузке данных. Пожалуйста, попробуйте снова.');
             } finally {
                 setLoading(false);
             }

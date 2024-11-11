@@ -12,11 +12,11 @@ function SearchComponent() {
     const getResults = async () => {
       setLoading(true);
       try {
-        const response = await fetchItems();
-        const data = await response.json();
+        const data = await fetchItems(); // Предполагаем, что fetchItems уже возвращает распарсенные данные
         setResults(data.items);
       } catch (err) {
-        setError(err);
+        console.error('Ошибка при загрузке данных:', err.message); // Более подробная ошибка
+        setError('Ошибка при загрузке данных. Пожалуйста, попробуйте снова.');
       } finally {
         setLoading(false);
       }
@@ -26,34 +26,34 @@ function SearchComponent() {
   }, []);
 
   const handleSearch = () => {
-    const filteredResults = search(searchTerm, results);
+    const filteredResults = search(searchTerm, results); // Не хватает функции search, ее нужно реализовать
     setResults(filteredResults);
   };
 
   const handleResultClick = (page) => {
     setSearchTerm('');
-    // здесь можно добавить дополнительные действия при клике на ссылку
+    // Здесь можно добавить дополнительные действия при клике на ссылку
   };
 
   if (loading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка: {error.message}</div>;
+  if (error) return <div>Ошибка: {error}</div>;
 
   return (
-    <div>
-      <h2>Поиск</h2>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Поиск</button>
-      <SearchResults
-        debouncedQuery={searchTerm}
-        loading={loading}
-        filteredPages={results}
-        onResultClick={handleResultClick}
-      />
-    </div>
+      <div>
+        <h2>Поиск</h2>
+        <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Поиск</button>
+        <SearchResults
+            debouncedQuery={searchTerm}
+            loading={loading}
+            filteredPages={results}
+            onResultClick={handleResultClick}
+        />
+      </div>
   );
 }
 
