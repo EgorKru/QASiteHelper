@@ -5,7 +5,7 @@ import { fetchItems } from './api';
 import { search } from './search';
 import SearchResults from './components/SearchResults';
 import * as Components from './components';
-import AboutPage from './components/PagesJS/AboutPage';
+import AboutPage from './components/Pages/aboutPage/AboutPage';
 import LiveCodingTrainersPage from './components/InternalContentBlocks/LiveCodingTrainersPage';
 import CompilerPage from './components/compilator/CompilerPage'; // Импортируем компилятор
 

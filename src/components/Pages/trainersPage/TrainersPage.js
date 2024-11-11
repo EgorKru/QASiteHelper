@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchItems } from '../../api'; // Импортируем функцию для получения данных
+import { fetchItems } from '../../../api';
 import './TrainersPage.css'; // Импортируйте стили, если они нужны
 
 const TrainersPage = () => {
