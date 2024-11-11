@@ -1,0 +1,101 @@
+/* ConsultationPage.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.container {
+    position: relative;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--neon-shadow);
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    opacity: 0.3;
+    animation: pulsate 2s infinite alternate;
+}
+
+.heading {
+    font-size: 22px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-shadow: var(--neon-shadow);
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #9cffd3;
+}
+
+.timerContainer {
+    margin: 20px 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.timerText {
+    font-size: 14px;
+    color: #66ff66;
+}
+
+.timer {
+    font-size: 20px;
+    color: var(--primary-color);
+    text-shadow: var(--neon-shadow);
+}
+
+.note {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.bookButton {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--header-bg-color);
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--primary-color);
+    transition: transform 0.3s ease;
+    border-radius: var(--border-radius);
+}
+
+.bookButton:hover {
+    transform: scale(1.1);
+    box-shadow: var(--neon-shadow);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulsate {
+    from { transform: scale(1); opacity: 0.7; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes neonFlicker {
+    0%, 100% { text-shadow: var(--neon-shadow); }
+    50% { text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); }
+}
