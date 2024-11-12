@@ -1,17 +1,24 @@
-import React from 'react';
-import styles from './AboutPage.module.css'; //стили
+import React, { useState, useEffect } from 'react';
+import styles from './AboutPage.module.css'; // стили
 
 const randomPhrases = [
-    //блок на уровне задумки, для генерации рандомных фраз ;)
     "QA — это не просто работа, это искусство!",
     "Каждая ошибка — это шаг к совершенству.",
     "Тестирование — это не просто проверка, это улучшение всего процесса.",
     "Каждый баг — это шанс сделать продукт лучше."
 ];
 
-const randomPhrase = randomPhrases[Math.floor(Math.random() * randomPhrases.length)];
-
 const AboutPage = () => {
+    const [randomPhrase, setRandomPhrase] = useState(randomPhrases[0]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRandomPhrase(randomPhrases[Math.floor(Math.random() * randomPhrases.length)]);
+        }, 5000); // обновляется каждые 5 секунд
+
+        return () => clearInterval(interval); // очистка интервала при размонтировании
+    }, []);
+
     return (
         <div className={`${styles.container} ${styles.block}`}>
             <h2 className={`${styles.heading} ${styles.neonEffect}`}>О проекте</h2>
@@ -32,7 +39,6 @@ const AboutPage = () => {
                 доступным. Ваш успех — наша цель!
             </p>
             <p className={styles.paragraph}>{randomPhrase}</p>
-
         </div>
     );
 };
