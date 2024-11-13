@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo:100');
+
+.sidebar {
+    width: 300px;
+    padding: 20px;
+    background-color: var(--background-color);
+    border-right: 1px solid var(--primary-color);
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.sidebarTitle {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 15px;
+    position: sticky;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-shadow: var(--neon-shadow);
+}
+
+.sectionItem {
+    margin-left: 20px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration) ease;
+}
+
+.sectionItem:hover {
+    background-color: var(--highlight-bg-color);
+}
+
+.sectionTitle {
+    padding: 10px 0;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    border-left: 3px solid transparent;
+    transition: border-color var(--transition-duration) ease, transform 0.2s ease;
+}
+
+.sectionTitleActive {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-shadow: var(--neon-shadow);
+    border-left: 3px solid var(--primary-color);
+}
+
+.sectionTitle:hover {
+    transform: scale(1.02);
+}
+
+.bullet {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: var(--neon-shadow);
+}
+
+.bulletActive {
+    background: var(--primary-color);
+    box-shadow: var(--neon-shadow);
+}
+
+.icon {
+    font-size: 0.75em;
+    color: var(--text-color);
+}
+
+.description {
+    margin-left: 20px;
+    color: #999999;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+.childContainer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.sectionTitleActive + .childContainer {
+    max-height: 1000px;
+}
+
