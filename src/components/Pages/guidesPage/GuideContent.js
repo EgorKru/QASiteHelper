@@ -17,14 +17,14 @@ const GuideContent = ({ activeSection }) => {
 
     return (
         <div className="content-container">
-            {content[activeSection] || <div>Выберите раздел для начала.</div>}
+            {content[activeSection] || <div>.</div>}
         </div>
     );
 };
 
 const IntroToSQL = () => (
     <div>
-        <h1>Введение в SQL</h1>
+        <h1>Заголовок</h1>
         <p>SQL (Structured Query Language) — это язык для управления и обработки данных в реляционных базах данных.</p>
         <h2>Основные команды</h2>
         <p>Вы можете использовать такие команды, как <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, и <code>DELETE</code> для выполнения операций в базе данных.</p>
